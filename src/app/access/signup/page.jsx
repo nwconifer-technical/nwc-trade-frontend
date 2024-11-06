@@ -5,8 +5,6 @@ import Form from "next/form";
 import Link from "next/link";
 import doSignup from "./doSignup";
 
-const NS_TOKEN = process.env.NS_TOKEN;
-
 const initialState = {
   statusMessage: "",
 };
@@ -32,7 +30,7 @@ const Signup = () => {
           <p>
             For &quot;NS Code&quot;, please go to{" "}
             <Link
-              href={`https://www.nationstates.net/page=verify_login?token=${NS_TOKEN}`}
+              href={`https://www.nationstates.net/page=verify_login?token=${process.env.NEXT_PUBLIC_NS_TOKEN}`}
               target="_blank"
             >
               Nationstates Verify

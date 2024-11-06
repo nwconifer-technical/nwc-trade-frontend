@@ -18,7 +18,7 @@ const RootLayout = async ({ children }) => {
   const cookieStore = await cookies();
   const sessionCookie = cookieStore.get("session");
   return (
-    <html lang="en">
+    <html lang="en" data-theme="light">
       <body className={figtree.className}>
         <header className="header">
           <Navbar loggedIn={sessionCookie ? true : false} />

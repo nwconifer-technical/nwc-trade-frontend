@@ -10,16 +10,19 @@ const doSignup = async (prevState, formData) => {
   const nationName = formData.get("nationName");
   const passWord = formData.get("password");
   const reqRet = await fetch(`${API_ROUTE}/verify/nation`, {
-    method: "post",
+    method: "POST",
     body: JSON.stringify({
       nationName,
       PasswordString: passWord,
     }),
   });
+  console.log(reqRet);
   if (reqRet.status == 404) {
     return { statusMessage: "No such registered user" };
   } else if (reqRet.status == 403) {
     return { statusMessage: "Incorrect password" };
+  } else if (reqRet.status != 200) {
+    return { statusMessage: "Server issue" };
   }
   console.log(reqRet.status);
   const reqBod = await reqRet.json();

@@ -1,10 +1,8 @@
 "use server";
 const parseString = require("xml2js").parseString;
-import { hash } from "bcrypt";
 import { redirect } from "next/navigation";
 
 const API_ROUTE = process.env.API_ADDRESS;
-const NS_TOKEN = process.env.NS_TOKEN;
 
 const doSignup = async (prevState, formData) => {
   const nationName = formData.get("nationName");
@@ -12,7 +10,7 @@ const doSignup = async (prevState, formData) => {
   const nsVerify = formData.get("nsVerify");
   const PasswordString = formData.get("password");
   const response = await fetch(
-    `https://www.nationstates.net/cgi-bin/api.cgi?a=verify&nation=${nationName}&checksum=${nsVerify}&token=${NS_TOKEN}&q=region`
+    `https://www.nationstates.net/cgi-bin/api.cgi?a=verify&nation=${nationName}&checksum=${nsVerify}&token=${process.env.NEXT_PUBLIC_NS_TOKEN}&q=region`
   );
   const received = await response.text();
   var appropriate;
