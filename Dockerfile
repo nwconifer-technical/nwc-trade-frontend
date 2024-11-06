@@ -11,7 +11,7 @@ ENV NEXT_PUBLIC_NS_TOKEN="IAMATESTINGPAGEWOOOHOOOO"
 ENV API_ADDRESS="https://api.finance.nwconifer.net/"
 RUN npm run build
 EXPOSE 3000
-COPY /app/public /app/public
+COPY /app/public ./
 COPY /app/.next/standalone ./
 COPY /app/.next/static /app/.next/static
 CMD ["node", ".next/standalone/server.js"]
