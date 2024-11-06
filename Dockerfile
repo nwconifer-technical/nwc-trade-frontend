@@ -1,7 +1,9 @@
 FROM node:18-alpine AS base
 
 RUN apk add --no-cache libc6-compat
-COPY package.json package-log.json* ./
+
+WORKDIR /app
+COPY *package.json *package-log.json ./
 RUN npm ci
 
 WORKDIR /app
