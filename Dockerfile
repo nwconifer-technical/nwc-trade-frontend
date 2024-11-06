@@ -1,8 +1,9 @@
 FROM node:18-alpine as base
 
 FROM base AS builder
-RUN apk add --no-cache libc6-compat
 WORKDIR /app
+RUN apk add --no-cache libc6-compat
+COPY package.json package-lock.json* ./
 RUN npm ci
 RUN npm run build
 
