@@ -10,7 +10,8 @@ ENV SESSION_SECRET="$(openssl rand -hex 12)"
 ENV NEXT_PUBLIC_NS_TOKEN="IAMATESTINGPAGEWOOOHOOOO"
 ENV API_ADDRESS="https://api.finance.nwconifer.net/"
 RUN npm run build
-COPY /app/.next/standalone ./
-COPY /app/.next/static ./static
 EXPOSE 3000
-CMD ["npm", "start"]
+COPY /app/public /app/public
+COPY /app/.next/standalone ./
+COPY /app/.next/static /app/.next/static
+CMD ["node", ".next/standalone/server.js"]
