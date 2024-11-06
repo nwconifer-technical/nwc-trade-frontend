@@ -22,4 +22,4 @@ COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static /app/.next/static
 USER nextjs
 EXPOSE 3000
-CMD ["node", ".next/standalone/server.js"]
+CMD ["node", "server.js"]
