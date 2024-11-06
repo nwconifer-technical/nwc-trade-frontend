@@ -2,8 +2,8 @@ import { Figtree } from "next/font/google";
 import "./bulma.min.css";
 import { Navbar } from "./HeaderUnit";
 import { cookies } from "next/headers";
-import { decrypt } from "@/app/cookieUtilities";
-
+import Script from "next/script";
+// import "./myStyles.css";
 const figtree = Figtree({
   subsets: ["latin"],
   display: "swap",
@@ -25,6 +25,7 @@ const RootLayout = async ({ children }) => {
         </header>
         {children}
       </body>
+      <Script src="https://scripts.simpleanalyticscdn.com/latest.js" />
     </html>
   );
 };
