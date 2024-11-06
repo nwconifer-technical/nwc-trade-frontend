@@ -1,14 +1,13 @@
 import react from "react";
 import Image from "next/image";
 import Link from "next/link";
-import nsroLogo from "@/app/nsro.png";
 import signout from "./access/signout";
 
 const Navbar = (props) => {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <Image src={nsroLogo} alt="The NSRO Logo" width={175} height={511} />
+        <Image src="/nsro.png" alt="The NSRO Logo" width={175} height={511} />
       </div>
       <div className="navbar-menu">
         <Link href="/" className="navbar-item">
