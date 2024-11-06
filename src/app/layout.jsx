@@ -3,6 +3,7 @@ import "./bulma.min.css";
 import { Navbar } from "./HeaderUnit";
 import { cookies } from "next/headers";
 import Script from "next/script";
+import Link from "next/link";
 // import "./myStyles.css";
 const figtree = Figtree({
   subsets: ["latin"],
@@ -24,6 +25,11 @@ const RootLayout = async ({ children }) => {
           <Navbar loggedIn={sessionCookie ? true : false} />
         </header>
         {children}
+        <footer className="footer has-text-centered">
+          <Link href="https://github.com/nwconifer-technical">
+            Made by New West Conifer Technical
+          </Link>
+        </footer>
       </body>
       <Script src="https://scripts.simpleanalyticscdn.com/latest.js" />
     </html>

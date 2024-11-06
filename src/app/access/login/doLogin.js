@@ -41,7 +41,7 @@ const doSignup = async (prevState, formData) => {
     path: "/",
     maxAge: 7 * (60 * 60 * 24),
   });
-  return redirect(`/`);
+  return redirect(`/account`);
 };
 
 export default doSignup;

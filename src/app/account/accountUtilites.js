@@ -22,8 +22,13 @@ const doPayment = async (prevState, formData) => {
   const message = formData.get("message")
     ? formData.get("message")
     : "Cash Transfer";
+  console.log(sender);
   const reqRet = await fetch(`${API_ROUTE}/cash/transaction`, {
     method: "post",
+    headers: {
+      AuthKey: prevState.authKey,
+      NationName: sender,
+    },
     body: JSON.stringify({
       sender,
       receiver,
@@ -33,25 +38,20 @@ const doPayment = async (prevState, formData) => {
   });
   if (reqRet.status == 404) {
     return {
-      statusMessage: {
-        good: false,
-        message: "Payee does not exist",
-      },
+      good: false,
+      statusMessage: "Payee does not exist",
     };
   }
-  if (reqRet.status == 500) {
+  if (reqRet.status == 200) {
     return {
-      statusMessage: {
-        good: false,
-        message: "Server Error",
-      },
+      good: true,
+      statusMessage: "Transfer Successful",
     };
   }
+  console.log(reqRet.status);
   return {
-    statusMessage: {
-      good: true,
-      message: "Transfer Successful",
-    },
+    good: false,
+    statusMessage: "Server or Other Error",
   };
 };
 

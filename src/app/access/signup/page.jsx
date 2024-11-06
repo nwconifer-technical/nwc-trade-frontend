@@ -46,12 +46,6 @@ const Signup = () => {
               <input type="text" name="nationName" id="nationName" required />
             </div>
             <div className="field">
-              <label className="label" htmlFor="region">
-                Region Name
-              </label>
-              <input type="text" name="regionName" id="region" required />
-            </div>
-            <div className="field">
               <label className="label" htmlFor="password">
                 Password
               </label>
