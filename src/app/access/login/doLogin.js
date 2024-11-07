@@ -24,9 +24,7 @@ const doSignup = async (prevState, formData) => {
   } else if (reqRet.status != 200) {
     return { statusMessage: "Server issue" };
   }
-  console.log(reqRet.status);
   const reqBod = await reqRet.json();
-  console.log(reqRet);
   const cookieStore = await cookies();
   const sessionThing = await encrypt({
     nationName,

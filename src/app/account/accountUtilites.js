@@ -16,21 +16,19 @@ const getCashInfo = async (nationName) => {
 // }
 
 const doPayment = async (prevState, formData) => {
-  const sender = formData.get("payer");
   const receiver = formData.get("payeeName");
   const value = formData.get("value");
   const message = formData.get("message")
     ? formData.get("message")
     : "Cash Transfer";
-  console.log(sender);
   const reqRet = await fetch(`${API_ROUTE}/cash/transaction`, {
     method: "post",
     headers: {
       AuthKey: prevState.authKey,
-      NationName: sender,
+      NationName: prevState.payerName,
     },
     body: JSON.stringify({
-      sender,
+      sender: prevState.payerName,
       receiver,
       value,
       message,

@@ -22,7 +22,7 @@ const CashAccount = async () => {
           <div className="column">
             <div className="box">
               <TransactForm
-                payerName={sessionCookie.nationName}
+                payerName={sessionCookie.name}
                 authKey={sessionCookie.authToken}
               />
             </div>
