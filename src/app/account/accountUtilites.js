@@ -17,7 +17,7 @@ const getCashInfo = async (nationName) => {
 
 const doPayment = async (prevState, formData) => {
   const receiver = formData.get("payeeName");
-  const value = formData.get("value");
+  const value = formData.get("amount");
   const message = formData.get("message")
     ? formData.get("message")
     : "Cash Transfer";
@@ -38,18 +38,24 @@ const doPayment = async (prevState, formData) => {
     return {
       good: false,
       statusMessage: "Payee does not exist",
+      authKey: prevState.authKey,
+      payerName: prevState.payerName,
     };
   }
   if (reqRet.status == 200) {
     return {
       good: true,
       statusMessage: "Transfer Successful",
+      authKey: prevState.authKey,
+      payerName: prevState.payerName,
     };
   }
   console.log(reqRet.status);
   return {
     good: false,
     statusMessage: "Server or Other Error",
+    authKey: prevState.authKey,
+    payerName: prevState.payerName,
   };
 };
 
