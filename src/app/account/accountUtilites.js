@@ -17,22 +17,31 @@ const getCashInfo = async (nationName) => {
 
 const doPayment = async (prevState, formData) => {
   const receiver = formData.get("payeeName");
-  const value = formData.get("amount");
+  const amount = formData.get("amount");
   const message = formData.get("message")
     ? formData.get("message")
     : "Cash Transfer";
+  if (receiver == prevState.payerName) {
+    return {
+      good: false,
+      statusMessage: "You must specify someone else",
+      authKey: prevState.authKey,
+      payerName: prevState.payerName,
+    };
+  }
+  const requestBody = JSON.stringify({
+    Sender: prevState.payerName,
+    receiver,
+    value: amount,
+    message,
+  });
   const reqRet = await fetch(`${API_ROUTE}/cash/transaction`, {
     method: "post",
     headers: {
       AuthKey: prevState.authKey,
       NationName: prevState.payerName,
     },
-    body: JSON.stringify({
-      sender: prevState.payerName,
-      receiver,
-      value,
-      message,
-    }),
+    body: requestBody,
   });
   if (reqRet.status == 404) {
     return {

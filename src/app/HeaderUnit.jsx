@@ -7,7 +7,12 @@ const Navbar = (props) => {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <Image src={`/public/nsro.png`} alt="The NSRO Logo" width={175} />
+        <Image
+          src={`/public/nsro.png`}
+          alt="The NSRO Logo"
+          width={175}
+          height={75}
+        />
       </div>
       <div className="navbar-menu">
         <Link href="/" className="navbar-item">

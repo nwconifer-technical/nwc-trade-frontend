@@ -6,21 +6,17 @@ import Form from "next/form";
 
 const TransactForm = (props) => {
   const initialState = {
-    statusMessage: {
-      good: true,
-      message: "",
-    },
+    statusMessage: "",
+    good: false,
     authKey: props.authKey,
+    payerName: props.payerName,
   };
+  console.log(initialState.authKey);
   const [state, formAction] = useActionState(doPayment, initialState);
   return (
     <Form action={formAction}>
-      {state.statusMessage.message ? (
-        <div
-          className={`message ${
-            statusMessage.good ? `is-success` : `is-danger`
-          }`}
-        >
+      {state.statusMessage ? (
+        <div className={`message ${state.good ? `is-success` : `is-danger`}`}>
           <div className="message-header">{state.statusMessage}</div>
         </div>
       ) : (
@@ -39,16 +35,16 @@ const TransactForm = (props) => {
         />
       </div>
       <div className="field">
-        <label className="label" htmlFor="sender">
+        <label className="label" htmlFor="payeeName">
           Payee
         </label>
-        <input type="text" name="sender" id="sender" required />
+        <input type="text" name="payeeName" id="payeeName" required />
       </div>
       <div className="field">
         <label className="label" htmlFor="value">
           Amount to Send ($):
         </label>
-        <input type="number" name="amount" id="value" required />
+        <input type="number" name="amount" id="value" step={0.01} required />
       </div>
       <div className="field">
         <label className="label" htmlFor="message">

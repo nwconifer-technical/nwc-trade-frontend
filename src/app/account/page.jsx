@@ -22,7 +22,7 @@ const CashAccount = async () => {
           <div className="column">
             <div className="box">
               <TransactForm
-                payerName={sessionCookie.name}
+                payerName={sessionCookie.nationName}
                 authKey={sessionCookie.authToken}
               />
             </div>
@@ -41,15 +41,17 @@ const CashAccount = async () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {capitalReturn.transactions.map((transact) => (
-                    <tr key={transact.timecode}>
-                      <td>{transact.timecode}</td>
-                      <td>{transact.sender}</td>
-                      <td>{transact.receiver}</td>
-                      <td>{transact.value}</td>
-                      <td>{transact.message}</td>
-                    </tr>
-                  ))}
+                  {capitalReturn.transactions
+                    ? capitalReturn.transactions.map((transact) => (
+                        <tr key={transact.timecode}>
+                          <td>{transact.timecode}</td>
+                          <td>{transact.sender}</td>
+                          <td>{transact.receiver}</td>
+                          <td>${transact.value}</td>
+                          <td>{transact.message}</td>
+                        </tr>
+                      ))
+                    : ""}
                 </tbody>
                 <tfoot>
                   <tr>
