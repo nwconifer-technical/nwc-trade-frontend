@@ -18,6 +18,13 @@ const Navbar = (props) => {
         <Link href="/" className="navbar-item">
           Home
         </Link>
+        {props.loggedIn ? (
+          <Link href="/loans" className="navbar-item">
+            Loans
+          </Link>
+        ) : (
+          ""
+        )}
       </div>
       <div className="navbar-end">
         <div className="navbar-item">

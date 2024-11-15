@@ -31,6 +31,7 @@ const doSignup = async (prevState, formData) => {
     authToken: reqBod.AuthKey,
     region: reqBod.UserRegion,
     name: reqBod.UserName,
+    permssion: reqBod.UserPermission,
   });
   cookieStore.set({
     name: "session",

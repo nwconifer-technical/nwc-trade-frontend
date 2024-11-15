@@ -51,7 +51,7 @@ const CashAccount = async () => {
                           <td>{transact.message}</td>
                         </tr>
                       ))
-                    : ""}
+                    : "No Transactions here"}
                 </tbody>
                 <tfoot>
                   <tr>
