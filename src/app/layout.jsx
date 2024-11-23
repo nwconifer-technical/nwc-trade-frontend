@@ -19,7 +19,8 @@ export const metadata = {
 const RootLayout = async ({ children }) => {
   const cookieStore = await cookies();
   const sessionCookie = cookieStore.get("session");
-  const theCookie = await decrypt(sessionCookie.value);
+  var theCookie;
+  if (sessionCookie) theCookie = await decrypt(sessionCookie.value);
   return (
     <html lang="en" data-theme="light">
       <body className={figtree.className}>

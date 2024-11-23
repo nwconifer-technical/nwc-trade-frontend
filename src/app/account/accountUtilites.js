@@ -3,6 +3,7 @@
 const API_ROUTE = process.env.API_ADDRESS;
 
 const getCashInfo = async (nationName) => {
+  console.log(`${API_ROUTE}/cash/details/${nationName}`);
   const cashRequ = await fetch(`${API_ROUTE}/cash/details/${nationName}`);
   const theCashJson = await cashRequ.json();
   return theCashJson;
@@ -17,7 +18,7 @@ const getCashInfo = async (nationName) => {
 
 const doPayment = async (prevState, formData) => {
   const receiver = formData.get("payeeName");
-  const amount = parseFloat(formData.get("amount"));
+  const value = parseFloat(formData.get("amount"));
   const message = formData.get("message")
     ? formData.get("message")
     : "Cash Transfer";
@@ -28,14 +29,14 @@ const doPayment = async (prevState, formData) => {
       ...prevState,
     };
   }
-  if (amount < 0.0) {
+  if (value < 0.0) {
     return {
       good: false,
       statusMessage: "Can't transfer nothing, or less than",
       ...prevState,
     };
   }
-  if (amount > prevState.currentCashAmount) {
+  if (value > prevState.currentCashAmount) {
     return {
       good: false,
       statusMessage: "Nice Try",
@@ -45,17 +46,18 @@ const doPayment = async (prevState, formData) => {
   const requestBody = JSON.stringify({
     Sender: prevState.payerName,
     receiver,
-    value: amount,
+    value,
     message,
   });
   const reqRet = await fetch(`${API_ROUTE}/cash/transaction`, {
     method: "post",
     headers: {
       AuthKey: prevState.authKey,
-      NationName: prevState.payerName,
+      NationName: prevState.executorName,
     },
     body: requestBody,
   });
+  console.log(reqRet.status);
   if (reqRet.status == 404) {
     return {
       good: false,

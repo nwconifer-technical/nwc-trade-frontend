@@ -12,11 +12,11 @@ const CashAccount = async () => {
     return redirect(`/`);
   }
   const sessionCookie = await decrypt(sesh);
-  const capitalReturn = await getCashInfo(sessionCookie.nationName);
+  const capitalReturn = await getCashInfo(sessionCookie.name);
   return (
     <>
       <div className="block">
-        <h1 className="title is-1">Hello, {sessionCookie.nationName}</h1>
+        <h1 className="title is-1">Hello, {sessionCookie.name}</h1>
         <h3 className="title is-4">Cash Balance: ${capitalReturn.handCash}</h3>
         <h5 className="subtitle">
           Cash In Escrow: ${capitalReturn.escrowCash}
@@ -26,7 +26,8 @@ const CashAccount = async () => {
           <div className="column">
             <div className="box">
               <TransactForm
-                payerName={sessionCookie.nationName}
+                payerName={sessionCookie.name}
+                executorName={sessionCookie.name}
                 authKey={sessionCookie.authToken}
                 currentCashAmount={capitalReturn.handCash}
               />

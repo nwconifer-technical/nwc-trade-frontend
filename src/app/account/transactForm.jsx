@@ -21,13 +21,13 @@ const TransactForm = (props) => {
         ""
       )}
       <div className="field">
-        <label htmlFor="payer" className="label">
+        <label htmlFor="payerName" className="label">
           Payer
         </label>
         <input
           type="text"
-          name="payer"
-          id="payer"
+          name="payerName"
+          id="payerName"
           value={props.payerName}
           disabled
         />

@@ -4,7 +4,6 @@ import { getAllNations } from "./homepageUtilities";
 
 const index = async () => {
   const allNations = await getAllNations();
-  console.log(allNations);
   return (
     <div className="block">
       <div className="message is-danger">

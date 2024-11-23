@@ -7,7 +7,6 @@ const Navbar = async (props) => {
   var userPerms = "";
   if (props.loggedIn) {
     userPerms = props.sessionCookie.permission;
-    console.log(props.sessionCookie);
   }
   return (
     <nav className="navbar">
@@ -25,7 +24,7 @@ const Navbar = async (props) => {
         </Link>
         {props.loggedIn ? (
           <Link href="/loans" className="navbar-item">
-            Loans
+            My Loans
           </Link>
         ) : (
           ""

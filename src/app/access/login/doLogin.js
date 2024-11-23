@@ -25,11 +25,12 @@ const doSignup = async (prevState, formData) => {
   }
   const reqBod = await reqRet.json();
   const cookieStore = await cookies();
+  console.log(reqBod.UserPermission);
   const sessionThing = await encrypt({
     authToken: reqBod.AuthKey,
     region: reqBod.UserRegion,
     name: reqBod.UserName,
-    permssion: reqBod.UserPermission,
+    permission: reqBod.UserPermission,
   });
   cookieStore.set({
     name: "session",

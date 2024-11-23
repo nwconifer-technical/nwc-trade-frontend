@@ -5,7 +5,6 @@ import { redirect } from "next/navigation";
 const API_ROUTE = process.env.API_ADDRESS;
 
 const getRegionInfo = async (nation, region, authKey) => {
-  console.log(`${API_ROUTE}/region/${region}`);
   const received = await fetch(`${API_ROUTE}/region/${region}`, {
     headers: {
       AuthKey: authKey,
@@ -13,7 +12,7 @@ const getRegionInfo = async (nation, region, authKey) => {
     },
   });
   if (received.status == 403) {
-    return redirect(`/`);
+    return { message: "no" };
   }
   return received.json();
 };

@@ -11,10 +11,18 @@ const RegionAccount = async () => {
   const sesh = cookieStore.get("session")?.value;
   const sessionCookie = await decrypt(sesh);
   const regionInfo = await getRegionInfo(
-    sessionCookie.nationName,
+    sessionCookie.name,
     sessionCookie.region,
     sessionCookie.authToken
   );
+  if (regionInfo.message)
+    return (
+      <div className="block">
+        <div className={`message is-danger`}>
+          <div className="message-header">It seems you're not allowed here</div>
+        </div>
+      </div>
+    );
   return (
     <>
       <div className="block">
@@ -25,48 +33,16 @@ const RegionAccount = async () => {
         <div className="columns">
           <div className="column">
             <div className="box">
-              {/* <TransactForm
-                payerName={sessionCookie.name}
+              <TransactForm
+                payerName={sessionCookie.region}
+                executorName={sessionCookie.name}
                 authKey={sessionCookie.authToken}
-              /> */}
+                currentCashAmount={regionInfo.HandValue}
+              />
             </div>
           </div>
           <div className="column">
             <div className="box">
-              <h5 className="subtitle">Recent Cash Transactions</h5>
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th>Timecode</th>
-                    <th>Payer</th>
-                    <th>Payee</th>
-                    <th>Value</th>
-                    <th>Message</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {regionInfo.CashTransacts
-                    ? regionInfo.CashTransacts.map((transact) => (
-                        <tr key={transact.timecode}>
-                          <td>{transact.timecode}</td>
-                          <td>{transact.sender}</td>
-                          <td>{transact.receiver}</td>
-                          <td>${transact.value}</td>
-                          <td>{transact.message}</td>
-                        </tr>
-                      ))
-                    : "No Transactions here"}
-                </tbody>
-                <tfoot>
-                  <tr>
-                    <th>Timecode</th>
-                    <th>Payer</th>
-                    <th>Payee</th>
-                    <th>Value</th>
-                    <th>Message</th>
-                  </tr>
-                </tfoot>
-              </table>
               <h5 className="subtitle">Existing Loans</h5>
               <table className="table">
                 <thead>
@@ -106,6 +82,40 @@ const RegionAccount = async () => {
                     </tr>
                   )}
                 </tbody>
+              </table>
+              <h5 className="subtitle">Recent Cash Transactions</h5>
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>Timecode</th>
+                    <th>Payer</th>
+                    <th>Payee</th>
+                    <th>Value</th>
+                    <th>Message</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {regionInfo.CashTransacts
+                    ? regionInfo.CashTransacts.map((transact) => (
+                        <tr key={transact.timecode}>
+                          <td>{transact.timecode}</td>
+                          <td>{transact.sender}</td>
+                          <td>{transact.receiver}</td>
+                          <td>${transact.value}</td>
+                          <td>{transact.message}</td>
+                        </tr>
+                      ))
+                    : "No Transactions here"}
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <th>Timecode</th>
+                    <th>Payer</th>
+                    <th>Payee</th>
+                    <th>Value</th>
+                    <th>Message</th>
+                  </tr>
+                </tfoot>
               </table>
             </div>
           </div>
