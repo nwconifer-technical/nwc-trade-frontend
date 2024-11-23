@@ -1,9 +1,9 @@
 "use server";
-
 const API_ROUTE = process.env.API_ADDRESS;
 
 const getUserLoans = async (nationName, authKey) => {
-  const fetched = await fetch(`${API_ROUTE}/loans/${nationName}`, {
+  console.log(authKey);
+  const fetched = await fetch(`${API_ROUTE}/loans`, {
     method: "GET",
     headers: {
       AuthKey: authKey,
@@ -47,6 +47,13 @@ const issueLoan = async (prevState, formData) => {
     return {
       good: false,
       statusMessage: "Lendee does not exist",
+      ...prevState,
+    };
+  }
+  if (loanReturn.status == 403) {
+    return {
+      good: false,
+      statusMessage: "Unauthorized",
       ...prevState,
     };
   }

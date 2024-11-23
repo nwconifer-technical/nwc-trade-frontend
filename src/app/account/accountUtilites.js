@@ -63,6 +63,13 @@ const doPayment = async (prevState, formData) => {
       ...prevState,
     };
   }
+  if (reqRet.status == 403) {
+    return {
+      good: false,
+      statusMessage: "Unauthorised",
+      ...prevState,
+    };
+  }
   if (reqRet.status == 200) {
     return {
       good: true,

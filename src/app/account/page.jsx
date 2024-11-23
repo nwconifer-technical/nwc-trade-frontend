@@ -13,7 +13,6 @@ const CashAccount = async () => {
   }
   const sessionCookie = await decrypt(sesh);
   const capitalReturn = await getCashInfo(sessionCookie.nationName);
-  console.log(capitalReturn);
   return (
     <>
       <div className="block">
