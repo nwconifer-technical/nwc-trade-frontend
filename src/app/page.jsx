@@ -1,27 +1,52 @@
 import react from "react";
 import Link from "next/link";
+import { getAllNations } from "./homepageUtilities";
 
-const index = () => (
-  <div className="block">
-    <div className="message is-danger">
-      <div className="message-header">UNDER DEVELOPMENT</div>
-      <div className="message-body">
-        This site is still under development, is pretty unstable and cash
-        balances will jump around. <br />
-        Before going actually live, all trades, transactions, loans and user
-        accounts will be deleted.
+const index = async () => {
+  const allNations = await getAllNations();
+  console.log(allNations);
+  return (
+    <div className="block">
+      <div className="message is-danger">
+        <div className="message-header">UNDER DEVELOPMENT</div>
+        <div className="message-body">
+          This site is still under development, is pretty unstable and cash
+          balances will jump around. <br />
+          Before going actually live, all trades, transactions, loans and user
+          accounts will be deleted.
+        </div>
+      </div>
+      <h1 className="title">Welcome to the Site!</h1>
+
+      <p>
+        This will, eventually, be the premiere{" "}
+        <Link href={"https://www.nationstates.net/"}>Nationstates</Link> cash
+        systems and region stock exchange, for now it&apos;s kinda empty. If you
+        run a region, please get in touch with @alicolliar on Discord and I can
+        add you to the system, probably.
+      </p>
+      <div className="box">
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Nations</th>
+            </tr>
+          </thead>
+          <tbody>
+            {allNations.Nations ? (
+              allNations.Nations.map((nationName) => (
+                <tr key={nationName}>
+                  <td>{nationName}</td>
+                </tr>
+              ))
+            ) : (
+              <p>No nations registered</p>
+            )}
+          </tbody>
+        </table>
       </div>
     </div>
-    <h1 className="title">Welcome to the Site!</h1>
-
-    <p>
-      This will, eventually, be the premiere{" "}
-      <Link href={"https://www.nationstates.net/"}>Nationstates</Link> cash
-      systems and region stock exchange, for now it&apos;s kinda empty. If you
-      run a region, please get in touch with @alicolliar on Discord and I can
-      add you to the system, probably.
-    </p>
-  </div>
-);
+  );
+};
 
 export default index;
