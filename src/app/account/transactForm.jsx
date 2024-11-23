@@ -8,10 +8,8 @@ const TransactForm = (props) => {
   const initialState = {
     statusMessage: "",
     good: false,
-    authKey: props.authKey,
-    payerName: props.payerName,
+    ...props,
   };
-  console.log(initialState.authKey);
   const [state, formAction] = useActionState(doPayment, initialState);
   return (
     <Form action={formAction}>

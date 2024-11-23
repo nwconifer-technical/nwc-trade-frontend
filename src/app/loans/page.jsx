@@ -2,18 +2,21 @@ import react from "react";
 import { decrypt } from "../cookieUtilities";
 import { cookies } from "next/headers";
 import Link from "next/link";
-import { getLoans } from "./loanUtilities";
+import { getUserLoans } from "./loanUtilities";
 import LoanForm from "./loanForm";
 
 const LoanListings = async () => {
   const cookieStore = await cookies();
   const sesh = cookieStore.get("session")?.value;
   const sessionCookie = await decrypt(sesh);
-  const allLoans = await getLoans(
+  const allLoans = await getUserLoans(
     sessionCookie.nationName,
     sessionCookie.authToken
   );
-  console.log(allLoans.yourLoans);
+  if (allLoans == "Server Error") {
+    return <h1>Server error</h1>;
+  }
+  console.log(allLoans);
   return (
     <div className="block">
       <div className="columns">

@@ -12,12 +12,12 @@ const getCashInfo = async (nationName) => {
 // 	Sender   string    `firestore:"sender" json:"sender"`
 // 	Receiver string    `firestore:"receiver" json:"receiver"`
 // 	Value    float64   `firestore:"value" json:"value"`
-// 	Message  string    `firestoe:"message,omitempty" json:"message"`
+// 	Message  string    `firestore:"message,omitempty" json:"message"`
 // }
 
 const doPayment = async (prevState, formData) => {
   const receiver = formData.get("payeeName");
-  const amount = formData.get("amount");
+  const amount = parseFloat(formData.get("amount"));
   const message = formData.get("message")
     ? formData.get("message")
     : "Cash Transfer";
@@ -25,8 +25,21 @@ const doPayment = async (prevState, formData) => {
     return {
       good: false,
       statusMessage: "You must specify someone else",
-      authKey: prevState.authKey,
-      payerName: prevState.payerName,
+      ...prevState,
+    };
+  }
+  if (amount < 0.0) {
+    return {
+      good: false,
+      statusMessage: "Can't transfer nothing, or less than",
+      ...prevState,
+    };
+  }
+  if (amount > prevState.currentCashAmount) {
+    return {
+      good: false,
+      statusMessage: "Nice Try",
+      ...prevState,
     };
   }
   const requestBody = JSON.stringify({
@@ -47,24 +60,21 @@ const doPayment = async (prevState, formData) => {
     return {
       good: false,
       statusMessage: "Payee does not exist",
-      authKey: prevState.authKey,
-      payerName: prevState.payerName,
+      ...prevState,
     };
   }
   if (reqRet.status == 200) {
     return {
       good: true,
       statusMessage: "Transfer Successful",
-      authKey: prevState.authKey,
-      payerName: prevState.payerName,
+      ...prevState,
     };
   }
   console.log(reqRet.status);
   return {
     good: false,
     statusMessage: "Server or Other Error",
-    authKey: prevState.authKey,
-    payerName: prevState.payerName,
+    ...prevState,
   };
 };
 

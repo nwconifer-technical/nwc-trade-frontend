@@ -16,7 +16,6 @@ const doSignup = async (prevState, formData) => {
       PasswordString: passWord,
     }),
   });
-  console.log(reqRet);
   if (reqRet.status == 404) {
     return { statusMessage: "No such registered user" };
   } else if (reqRet.status == 403) {

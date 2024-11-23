@@ -25,16 +25,7 @@ const Signup = () => {
         <h3>
           <i>Please ensure all information entered is correct</i>
         </h3>
-        <p>
-          For &quot;NS Code&quot;, please go to{" "}
-          <Link
-            href={`https://www.nationstates.net/page=verify_login?token=${process.env.NEXT_PUBLIC_NS_TOKEN}`}
-            target="_blank"
-          >
-            Nationstates Verify
-          </Link>
-          , copy the code to your clipboard and paste it below .
-        </p>
+        <p></p>
         <br />
         <Form action={formAction}>
           <div className="field">
@@ -51,7 +42,14 @@ const Signup = () => {
           </div>
           <div className="field">
             <label className="label" htmlFor="nsVerify">
-              NS Code
+              NS Code - For this, please go to{" "}
+              <Link
+                href={`https://www.nationstates.net/page=verify_login?token=${process.env.NEXT_PUBLIC_NS_TOKEN}`}
+                target="_blank"
+              >
+                Nationstates Verify
+              </Link>
+              , copy the code to your clipboard and paste it.
             </label>
             <input type="text" name="nsVerify" id="nsVerify" required />
           </div>

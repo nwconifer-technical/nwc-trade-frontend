@@ -3,12 +3,17 @@ import { decrypt } from "../cookieUtilities";
 import { cookies } from "next/headers";
 import { getCashInfo } from "./accountUtilites";
 import TransactForm from "./transactForm";
+import { redirect } from "next/navigation";
 
 const CashAccount = async () => {
   const cookieStore = await cookies();
   const sesh = cookieStore.get("session")?.value;
+  if (!sesh) {
+    return redirect(`/`);
+  }
   const sessionCookie = await decrypt(sesh);
   const capitalReturn = await getCashInfo(sessionCookie.nationName);
+  console.log(capitalReturn);
   return (
     <>
       <div className="block">
@@ -24,6 +29,7 @@ const CashAccount = async () => {
               <TransactForm
                 payerName={sessionCookie.nationName}
                 authKey={sessionCookie.authToken}
+                currentCashAmount={capitalReturn.handCash}
               />
             </div>
           </div>
