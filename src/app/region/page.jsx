@@ -19,7 +19,9 @@ const RegionAccount = async () => {
     return (
       <div className="block">
         <div className={`message is-danger`}>
-          <div className="message-header">It seems you're not allowed here</div>
+          <div className="message-header">
+            It seems you&apos;re not allowed here
+          </div>
         </div>
       </div>
     );
@@ -78,7 +80,7 @@ const RegionAccount = async () => {
                     ))
                   ) : (
                     <tr key="noLoans">
-                      "You have neither issued nor are due any loans"
+                      &quot;You have neither issued nor are due any loans&quot;
                     </tr>
                   )}
                 </tbody>
