@@ -26,7 +26,7 @@ const RegionAccount = async () => {
           <div className="column">
             <div className="box">
               {/* <TransactForm
-                payerName={sessionCookie.nationName}
+                payerName={sessionCookie.name}
                 authKey={sessionCookie.authToken}
               /> */}
             </div>
@@ -81,26 +81,30 @@ const RegionAccount = async () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {regionInfo.loans
-                    ? regionInfo.loans.map((loan) => (
-                        <tr key={loan.id}>
-                          <td>{loan.id}</td>
-                          <td>{loan.lender}</td>
-                          <td>{loan.lendee}</td>
-                          <td>{loan.loanRate}%</td>
-                          <td>${loan.lentValue}</td>
-                          <td>${loan.currentValue}</td>
-                          <td>
-                            <Link
-                              href={`/`} // Replace this when [loanId]/page.jsx is set up
-                              className="button is-primary"
-                            >
-                              View More
-                            </Link>
-                          </td>
-                        </tr>
-                      ))
-                    : "You have neither issued nor are due any loans"}
+                  {regionInfo.Loans ? (
+                    regionInfo.Loans.map((loan) => (
+                      <tr key={loan.id}>
+                        <td>{loan.id}</td>
+                        <td>{loan.lender}</td>
+                        <td>{loan.lendee}</td>
+                        <td>{loan.loanRate}%</td>
+                        <td>${loan.lentValue}</td>
+                        <td>${loan.currentValue}</td>
+                        <td>
+                          <Link
+                            href={`/`} // Replace this when [loanId]/page.jsx is set up
+                            className="button is-primary"
+                          >
+                            View More
+                          </Link>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr key="noLoans">
+                      "You have neither issued nor are due any loans"
+                    </tr>
+                  )}
                 </tbody>
               </table>
             </div>

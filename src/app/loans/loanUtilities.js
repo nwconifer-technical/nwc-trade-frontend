@@ -2,7 +2,6 @@
 const API_ROUTE = process.env.API_ADDRESS;
 
 const getUserLoans = async (nationName, authKey) => {
-  console.log(authKey);
   const fetched = await fetch(`${API_ROUTE}/loans`, {
     method: "GET",
     headers: {

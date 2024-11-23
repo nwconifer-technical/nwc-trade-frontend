@@ -26,7 +26,6 @@ const doSignup = async (prevState, formData) => {
   const reqBod = await reqRet.json();
   const cookieStore = await cookies();
   const sessionThing = await encrypt({
-    nationName,
     authToken: reqBod.AuthKey,
     region: reqBod.UserRegion,
     name: reqBod.UserName,

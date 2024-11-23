@@ -4,6 +4,7 @@ import { Navbar } from "./HeaderUnit";
 import { cookies } from "next/headers";
 import Script from "next/script";
 import Link from "next/link";
+import { decrypt } from "./cookieUtilities";
 // import "./myStyles.css";
 const figtree = Figtree({
   subsets: ["latin"],
@@ -18,11 +19,15 @@ export const metadata = {
 const RootLayout = async ({ children }) => {
   const cookieStore = await cookies();
   const sessionCookie = cookieStore.get("session");
+  const theCookie = await decrypt(sessionCookie.value);
   return (
     <html lang="en" data-theme="light">
       <body className={figtree.className}>
         <header className="header">
-          <Navbar loggedIn={sessionCookie ? true : false} />
+          <Navbar
+            loggedIn={sessionCookie ? true : false}
+            sessionCookie={theCookie}
+          />
         </header>
         {children}
         <footer className="footer has-text-centered">

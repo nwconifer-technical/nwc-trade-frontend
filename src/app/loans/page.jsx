@@ -10,13 +10,12 @@ const LoanListings = async () => {
   const sesh = cookieStore.get("session")?.value;
   const sessionCookie = await decrypt(sesh);
   const allLoans = await getUserLoans(
-    sessionCookie.nationName,
+    sessionCookie.name,
     sessionCookie.authToken
   );
   if (allLoans == "Server Error") {
     return <h1>Server error</h1>;
   }
-  console.log(allLoans);
   return (
     <div className="block">
       <div className="columns">
@@ -65,7 +64,7 @@ const LoanListings = async () => {
           <div className="box">
             <h2 className="title is-3">Issue Loan</h2>
             <LoanForm
-              payerName={sessionCookie.nationName}
+              payerName={sessionCookie.name}
               authKey={sessionCookie.authToken}
             />
           </div>
