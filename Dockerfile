@@ -22,6 +22,7 @@ COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static /app/.next/static
 USER nextjs
 ENV SESSION_SECRET="$(openssl rand -hex 12)"
+ENV NEXT_PUBLIC_NS_TOKEN="IAMATESTINGPAGEWOOOHOOOO"
 ENV API_ADDRESS="https://api.finance.nwconifer.net/"
 EXPOSE 3000
 CMD ["node", "server.js"]

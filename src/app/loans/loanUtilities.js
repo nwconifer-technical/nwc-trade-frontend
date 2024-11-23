@@ -43,24 +43,21 @@ const issueLoan = async (prevState, formData) => {
     return {
       good: false,
       statusMessage: "Lendee does not exist",
-      authKey: prevState.AuthKey,
-      payerName: prevState.payerName,
+      ...prevState,
     };
   }
   if (loanReturn.status != 201) {
     return {
       good: false,
       statusMessage: "Server or Other Error",
-      authKey: prevState.AuthKey,
-      payerName: prevState.payerName,
+      ...prevState,
     };
   }
   const loanJson = await loanReturn.json();
   return {
     good: true,
     statusMessage: `Loan Created with ID ${loanJson.loanId}`,
-    authKey: prevState.AuthKey,
-    payerName: prevState.payerName,
+    ...prevState,
   };
 };
-export { getLoans, issueLoan };
+export { getUserLoans, issueLoan };
