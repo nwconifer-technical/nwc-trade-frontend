@@ -22,6 +22,9 @@ const Navbar = async (props) => {
         <Link href="/" className="navbar-item">
           Home
         </Link>
+        <Link href="/stocks" className="navbar-item">
+          All Stocks
+        </Link>
         {props.loggedIn ? (
           <Link href="/loans" className="navbar-item">
             My Loans

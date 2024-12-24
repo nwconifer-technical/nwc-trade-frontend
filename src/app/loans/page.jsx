@@ -47,7 +47,7 @@ const LoanListings = async () => {
                         <td>${loan.currentValue}</td>
                         <td>
                           <Link
-                            href={`/`} // Replace this when [loanId]/page.jsx is set up
+                            href={`/loans`} // Replace this when [loanId]/page.jsx is set up
                             className="button is-primary"
                           >
                             View More
