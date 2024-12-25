@@ -79,7 +79,7 @@ const AStock = async ({ params }) => {
               </thead>
               <tbody>
                 {theBook.Sells ? (
-                  theBook.Sells.some((order) => {
+                  theBook.Sells.map((order) => {
                     return (
                       <tr key={order.TradeId}>
                         <td>{order.Quantity}</td>
