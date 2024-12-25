@@ -15,7 +15,7 @@ const RegionAccount = async () => {
     sessionCookie.region,
     sessionCookie.authToken
   );
-  if (regionInfo.message)
+  if (regionInfo.message) {
     return (
       <div className="block">
         <div className={`message is-danger`}>
@@ -25,6 +25,7 @@ const RegionAccount = async () => {
         </div>
       </div>
     );
+  }
   return (
     <>
       <div className="block">

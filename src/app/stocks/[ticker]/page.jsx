@@ -1,13 +1,19 @@
 import React from "react";
 import { getAStock } from "../stockLandUtilities";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+import { TradeForm } from "../tradeForm";
+import { decrypt } from "@/app/cookieUtilities";
 
 const AStock = async ({ params }) => {
   const cookieStore = await cookies();
   const sesh = cookieStore.get("session")?.value;
+  const sessionCookie = sesh ? await decrypt(sesh) : null;
   const ticker = (await params).ticker;
   const theBook = await getAStock(ticker);
-  console.log(theBook);
+  if (!theBook) {
+    return redirect("/stocks");
+  }
   return (
     <div className="block">
       <h1 className="title">
@@ -30,7 +36,8 @@ const AStock = async ({ params }) => {
               <div className="cell">Order Book Depth: {theBook.BookDepth}</div>
               <div className="cell">
                 Number of Open Orders:{" "}
-                {theBook.Buys.length + theBook.Sells.length}
+                {(theBook.Buys ? theBook.Buys.length : 0) +
+                  (theBook.Sells ? theBook.Sells.length : 0)}
               </div>
             </div>
           </div>
@@ -46,15 +53,19 @@ const AStock = async ({ params }) => {
                 </tr>
               </thead>
               <tbody>
-                {theBook.Buys.length > 0
-                  ? theBook.Buys.map((order) => (
-                      <tr key={order.TradeId}>
-                        <td>{order.Quantity}</td>
-                        <td>{order.PriceType}</td>
-                        <td>{order.Price}</td>
-                      </tr>
-                    ))
-                  : "No Open Buys"}
+                {theBook.Buys ? (
+                  theBook.Buys.map((order) => (
+                    <tr key={order.TradeId}>
+                      <td>{order.Quantity}</td>
+                      <td>{order.PriceType}</td>
+                      <td>{order.Price}</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td>No Open Buys</td>
+                  </tr>
+                )}
               </tbody>
             </table>
             <h2 className="subtitle is-6">Open Sells</h2>
@@ -67,20 +78,39 @@ const AStock = async ({ params }) => {
                 </tr>
               </thead>
               <tbody>
-                {theBook.Sells.length > 0
-                  ? theBook.Sells.map((order) => (
+                {theBook.Sells ? (
+                  theBook.Sells.some((order) => {
+                    return (
                       <tr key={order.TradeId}>
                         <td>{order.Quantity}</td>
                         <td>{order.PriceType}</td>
                         <td>{order.Price}</td>
                       </tr>
-                    ))
-                  : "No Open Sells"}
+                    );
+                  })
+                ) : (
+                  <tr>
+                    <td>No Open Sells</td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
         </div>
-        <div className="column"></div>
+        <div className="column">
+          {sessionCookie ? (
+            <div className="box">
+              <h1 className="subtitle is-5">Trade Form</h1>
+              <TradeForm
+                authKey={sessionCookie.authToken}
+                traderName={sessionCookie.name}
+                ticker={ticker}
+              />
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
       </div>
     </div>
   );
