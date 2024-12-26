@@ -20,6 +20,7 @@ const TransactForm = (props) => {
       ) : (
         ""
       )}
+      <h3 className="subtitle is-5">Cash Transfer</h3>
       <div className="field">
         <label htmlFor="payerName" className="label">
           Payer

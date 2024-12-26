@@ -5,6 +5,8 @@ import Link from "next/link";
 import { getRegionInfo } from "./regionUtilities";
 import TransactForm from "../account/transactForm";
 import LoanForm from "../loans/loanForm";
+import { TradeForm } from "../stocks/tradeForm";
+import { HoldingsTable } from "../stockHoldings";
 
 const RegionAccount = async () => {
   const cookieStore = await cookies();
@@ -41,6 +43,18 @@ const RegionAccount = async () => {
                 executorName={sessionCookie.name}
                 authKey={sessionCookie.authToken}
                 currentCashAmount={regionInfo.HandValue}
+              />
+            </div>
+            <HoldingsTable
+              region={sessionCookie.region}
+              authKey={sessionCookie.authToken}
+              nationName={sessionCookie.name}
+            />
+            <div className="box">
+              <TradeForm
+                acctName={sessionCookie.region}
+                authKey={sessionCookie.authToken}
+                traderName={sessionCookie.name}
               />
             </div>
           </div>

@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { getCashInfo } from "./accountUtilites";
 import TransactForm from "./transactForm";
 import { redirect } from "next/navigation";
+import { HoldingsTable } from "../stockHoldings";
 
 const CashAccount = async () => {
   const cookieStore = await cookies();
@@ -32,6 +33,10 @@ const CashAccount = async () => {
                 currentCashAmount={capitalReturn.handCash}
               />
             </div>
+            <HoldingsTable
+              authKey={sessionCookie.authToken}
+              nationName={sessionCookie.name}
+            />
           </div>
           <div className="column">
             <div className="box">

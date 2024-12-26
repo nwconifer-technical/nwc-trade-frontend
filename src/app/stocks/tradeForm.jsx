@@ -13,7 +13,7 @@ export const TradeForm = (props) => {
     ticker: props.ticker ? props.ticker : "",
   };
   const [state, formAction] = useActionState(sendTrade, initialState);
-  console.log(state.statusMessage);
+
   return (
     <Form action={formAction}>
       {state.statusMessage ? (

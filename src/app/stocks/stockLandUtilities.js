@@ -51,53 +51,40 @@ export const sendTrade = async (prevState, formData) => {
       NationName: prevState.traderName,
     },
   });
-  if (!tradeSend.ok) {
-    if (tradeSend.status == 404) {
-      return {
-        good: false,
-        statusMessage: `Stock does not exist`,
-        authKey: prevState.authKey,
-        traderName: prevState.traderName,
-        acctName: prevState.acctName,
-        ticker: prevState.props,
-      };
-    } else if (tradeSend.status == 403) {
-      return {
-        good: false,
-        statusMessage: `Not authorised to trade through this account`,
-        authKey: prevState.authKey,
-        traderName: prevState.traderName,
-        acctName: prevState.acctName,
-        ticker: prevState.props,
-      };
-    } else {
-      return {
-        good: false,
-        statusMessage: `Server Error`,
-        authKey: prevState.authKey,
-        traderName: prevState.traderName,
-        acctName: prevState.acctName,
-        ticker: prevState.props,
-      };
-    }
-  }
-  if (tradeSend.bodyUsed) {
-    const theJs = await tradeSend.json();
-    console.log(theJs);
-    if (theJs.tradeId) {
-      return {
-        good: true,
-        statusMessage: `New Trade opened with id ${theJs.TradeId}`,
-        ...prevState,
-      };
-    }
+  if (tradeSend.status == 404) {
     return {
-      good: true,
-      statusMessage: `Trade Opened and Filled`,
+      good: false,
+      statusMessage: `Stock does not exist`,
       authKey: prevState.authKey,
       traderName: prevState.traderName,
       acctName: prevState.acctName,
       ticker: prevState.props,
+    };
+  } else if (tradeSend.status == 403) {
+    return {
+      good: false,
+      statusMessage: `Not authorised to trade through this account`,
+      authKey: prevState.authKey,
+      traderName: prevState.traderName,
+      acctName: prevState.acctName,
+      ticker: prevState.props,
+    };
+  } else if (tradeSend.status == 500) {
+    return {
+      good: false,
+      statusMessage: `Server Error`,
+      authKey: prevState.authKey,
+      traderName: prevState.traderName,
+      acctName: prevState.acctName,
+      ticker: prevState.props,
+    };
+  }
+  if (tradeSend.status == 201) {
+    const theJs = await tradeSend.json();
+    return {
+      good: true,
+      statusMessage: `New Trade opened with id ${theJs.TradeId}`,
+      ...prevState,
     };
   }
   return {
