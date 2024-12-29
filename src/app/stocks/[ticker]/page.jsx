@@ -26,7 +26,10 @@ const AStock = async ({ params }) => {
       <div className="columns">
         <div className="column">
           <div className="box">
-            <SharePriceGraph ticker={ticker} />
+            <SharePriceGraph
+              ticker={ticker}
+              curPrice={theBook.CurrentQuote.marketPrice}
+            />
             <p className="subtitle is-5">Stock Info</p>
             <div className="grid is-col-min-12">
               <div className="cell">
