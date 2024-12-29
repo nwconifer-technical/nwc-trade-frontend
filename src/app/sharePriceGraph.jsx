@@ -26,7 +26,14 @@ export const SharePriceGraph = async (props) => {
           label: "Time",
         },
       ]}
-      series={[{ dataKey: "LogPrice", label: "Share Price", curve: "linear" }]}
+      series={[
+        {
+          dataKey: "LogPrice",
+          label: "Share Price",
+          curve: "linear",
+          showMark: false,
+        },
+      ]}
       yAxis={[
         {
           id: "shPrice",
@@ -44,6 +51,7 @@ export const SharePriceGraph = async (props) => {
           hidden: true,
         },
       }}
+      grid={{ vertical: true, horizontal: true }}
     />
   );
 };

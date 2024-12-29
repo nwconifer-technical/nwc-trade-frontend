@@ -30,7 +30,8 @@ const TransactForm = (props) => {
           name="payerName"
           id="payerName"
           value={props.payerName}
-          disabled
+          disabled={true}
+          readOnly={true}
         />
       </div>
       <div className="field">

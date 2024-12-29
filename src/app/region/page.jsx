@@ -95,7 +95,7 @@ const RegionAccount = async () => {
                     ))
                   ) : (
                     <tr key="noLoans">
-                      &quot;You have neither issued nor are due any loans&quot;
+                      <td>You have neither issued nor are due any loans.</td>
                     </tr>
                   )}
                 </tbody>

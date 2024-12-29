@@ -32,7 +32,8 @@ export const TradeForm = (props) => {
           name="trader"
           id="trader"
           value={state.acctName}
-          disabled
+          disabled={true}
+          readOnly={true}
         />
       </div>
       <div className="field">
@@ -45,6 +46,7 @@ export const TradeForm = (props) => {
           id="ticker"
           value={state.ticker ? state.ticker : ""}
           disabled={state.ticker ? true : false}
+          readOnly={state.ticker ? true : false}
         />
       </div>
       <div className="field">

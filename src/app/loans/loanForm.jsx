@@ -10,6 +10,7 @@ const LoanForm = (props) => {
     good: false,
     authKey: props.authKey,
     payerName: props.payerName,
+    trader: props.trader ? props.trader : props.payerName,
   };
   const [state, formAction] = useActionState(issueLoan, initialState);
   return (
@@ -30,7 +31,8 @@ const LoanForm = (props) => {
           name="lender"
           id="lender"
           value={props.payerName}
-          disabled
+          disabled={true}
+          readOnly={true}
         />
       </div>
       <div className="field">

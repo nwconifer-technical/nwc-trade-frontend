@@ -19,6 +19,11 @@ export const getAStock = async (shareTicker) => {
 
 export const getPriceHistory = async (ticker) => {
   const pricesRequ = await fetch(`${API_ROUTE}/shares/recentprices/${ticker}`);
+  if (pricesRequ.status == 404) {
+    return {
+      RecentPrice: [],
+    };
+  }
   return await pricesRequ.json();
 };
 
