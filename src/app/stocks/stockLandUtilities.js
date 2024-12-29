@@ -17,6 +17,11 @@ export const getAStock = async (shareTicker) => {
   return theCashJson;
 };
 
+export const getPriceHistory = async (ticker) => {
+  const pricesRequ = await fetch(`${API_ROUTE}/shares/recentprices/${ticker}`);
+  return await pricesRequ.json();
+};
+
 // type tradeFormat struct {
 // 	TradeId   string
 // 	Ticker    string
@@ -51,6 +56,7 @@ export const sendTrade = async (prevState, formData) => {
       NationName: prevState.traderName,
     },
   });
+  console.log(tradeSend.status);
   if (tradeSend.status == 404) {
     return {
       good: false,
@@ -60,10 +66,10 @@ export const sendTrade = async (prevState, formData) => {
       acctName: prevState.acctName,
       ticker: prevState.props,
     };
-  } else if (tradeSend.status == 403) {
+  } else if (tradeSend.status == 401) {
     return {
       good: false,
-      statusMessage: `Not authorised to trade through this account`,
+      statusMessage: `Not authorised to execute this trade`,
       authKey: prevState.authKey,
       traderName: prevState.traderName,
       acctName: prevState.acctName,

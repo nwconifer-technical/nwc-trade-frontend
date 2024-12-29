@@ -5,6 +5,7 @@ import { cookies } from "next/headers";
 import Script from "next/script";
 import Link from "next/link";
 import { decrypt } from "./cookieUtilities";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 // import "./myStyles.css";
 const figtree = Figtree({
   subsets: ["latin"],
@@ -24,18 +25,20 @@ const RootLayout = async ({ children }) => {
   return (
     <html lang="en" data-theme="light">
       <body className={figtree.className}>
-        <header className="header">
-          <Navbar
-            loggedIn={sessionCookie ? true : false}
-            sessionCookie={theCookie}
-          />
-        </header>
-        {children}
-        <footer className="footer has-text-centered">
-          <Link href="https://github.com/nwconifer-technical">
-            Made by New West Conifer Technical
-          </Link>
-        </footer>
+        <AppRouterCacheProvider>
+          <header className="header">
+            <Navbar
+              loggedIn={sessionCookie ? true : false}
+              sessionCookie={theCookie}
+            />
+          </header>
+          {children}
+          <footer className="footer has-text-centered">
+            <Link href="https://github.com/nwconifer-technical">
+              Made by New West Conifer Technical
+            </Link>
+          </footer>
+        </AppRouterCacheProvider>
       </body>
       <Script src="https://scripts.simpleanalyticscdn.com/latest.js" />
     </html>

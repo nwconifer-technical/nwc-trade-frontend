@@ -6,7 +6,7 @@ RUN apk add --no-cache libc6-compat
 COPY . .
 ENV SESSION_SECRET="$(openssl rand -hex 12)"
 ENV NEXT_PUBLIC_NS_TOKEN="IAMATESTINGPAGEWOOOHOOOO"
-ENV API_ADDRESS="https://api.finance.nwconifer.net/"
+ENV API_ADDRESS="https://api.finance.nwconifer.net"
 RUN npm ci
 RUN npm run build
 
@@ -23,6 +23,6 @@ COPY --from=builder /app/.next/static /app/.next/static
 USER nextjs
 ENV SESSION_SECRET="$(openssl rand -hex 12)"
 ENV NEXT_PUBLIC_NS_TOKEN="IAMATESTINGPAGEWOOOHOOOO"
-ENV API_ADDRESS="https://api.finance.nwconifer.net/"
+ENV API_ADDRESS="https://api.finance.nwconifer.net"
 EXPOSE 3000
 CMD ["node", "server.js"]

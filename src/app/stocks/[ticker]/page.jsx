@@ -1,9 +1,10 @@
 import React from "react";
-import { getAStock } from "../stockLandUtilities";
+import { getAStock, getPriceHistory } from "../stockLandUtilities";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { TradeForm } from "../tradeForm";
 import { decrypt } from "@/app/cookieUtilities";
+import { SharePriceGraph } from "@/app/sharePriceGraph";
 
 const AStock = async ({ params }) => {
   const cookieStore = await cookies();
@@ -25,6 +26,7 @@ const AStock = async ({ params }) => {
       <div className="columns">
         <div className="column">
           <div className="box">
+            <SharePriceGraph ticker={ticker} />
             <p className="subtitle is-5">Stock Info</p>
             <div className="grid is-col-min-12">
               <div className="cell">
@@ -58,7 +60,11 @@ const AStock = async ({ params }) => {
                     <tr key={order.TradeId}>
                       <td>{order.Quantity}</td>
                       <td>{order.PriceType}</td>
-                      <td>{order.Price}</td>
+                      <td>
+                        {order.PriceType == "market"
+                          ? theBook.CurrentQuote.marketPrice
+                          : order.Price}
+                      </td>
                     </tr>
                   ))
                 ) : (
@@ -84,7 +90,11 @@ const AStock = async ({ params }) => {
                       <tr key={order.TradeId}>
                         <td>{order.Quantity}</td>
                         <td>{order.PriceType}</td>
-                        <td>{order.Price}</td>
+                        <td>
+                          {order.PriceType == "market"
+                            ? theBook.CurrentQuote.marketPrice
+                            : order.Price}
+                        </td>
                       </tr>
                     );
                   })
