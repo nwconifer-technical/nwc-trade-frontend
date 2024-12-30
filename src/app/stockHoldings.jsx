@@ -1,5 +1,6 @@
 "use server";
 import React from "react";
+import Link from "next/link";
 
 const API_ROUTE = process.env.API_ADDRESS;
 
@@ -35,6 +36,7 @@ const HoldingsTable = async (props) => {
             <td>Avg. Purchase Price</td>
             <td>Share Market Price</td>
             <td>Current Value</td>
+            <td></td>
           </tr>
         </thead>
         <tbody>
@@ -51,6 +53,14 @@ const HoldingsTable = async (props) => {
                   <td>${holding.AvgPrice}</td>
                   <td>${curQuote.marketPrice}</td>
                   <td>${curQuote.marketPrice * holding.ShareQuantity}</td>
+                  <td>
+                    <Link
+                      href={`/stocks/${holding.Ticker}`}
+                      className="button is-link"
+                    >
+                      Stock Info
+                    </Link>
+                  </td>
                 </tr>
               );
             })
