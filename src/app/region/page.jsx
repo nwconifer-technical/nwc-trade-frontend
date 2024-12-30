@@ -59,6 +59,11 @@ const RegionAccount = async () => {
             </div>
           </div>
           <div className="column">
+            <LoanForm
+              authKey={sessionCookie.authToken}
+              payerName={sessionCookie.region}
+              trader={sessionCookie.name}
+            />
             <div className="box">
               <h5 className="subtitle">Existing Loans</h5>
               <table className="table">
@@ -85,7 +90,7 @@ const RegionAccount = async () => {
                         <td>${loan.currentValue}</td>
                         <td>
                           <Link
-                            href={`/`} // Replace this when [loanId]/page.jsx is set up
+                            href={`/loans/${loan.id}`} // Replace this when [loanId]/page.jsx is set up
                             className="button is-primary"
                           >
                             View More

@@ -29,19 +29,22 @@ const issueLoan = async (prevState, formData) => {
       ...prevState,
     };
   }
+  const body = JSON.stringify({
+    lender: prevState.payerName,
+    lendee,
+    lentValue: amount,
+    loanRate: interestRate,
+  });
+  console.log(body);
   const loanReturn = await fetch(`${API_ROUTE}/loan/issue`, {
     method: "POST",
     headers: {
       AuthKey: prevState.authKey,
-      NationName: prevState.payerName,
+      NationName: prevState.trader,
     },
-    body: JSON.stringify({
-      lender: prevState.payerName,
-      lendee,
-      lentValue: amount,
-      loanRate: interestRate,
-    }),
+    body,
   });
+  console.log(loanReturn.status);
   if (loanReturn.status == 404) {
     return {
       good: false,
@@ -70,4 +73,48 @@ const issueLoan = async (prevState, formData) => {
     ...prevState,
   };
 };
-export { getUserLoans, issueLoan };
+
+const getLoan = async (loanId, AuthKey, NationName) => {
+  const fetched = await fetch(`${API_ROUTE}/loan/${loanId}`, {
+    method: "GET",
+    headers: {
+      AuthKey,
+      NationName,
+    },
+  });
+  if (fetched.status != 200) {
+    return null;
+  }
+  return await fetched.json();
+};
+
+const repayLoan = async (prevState, formData) => {
+  const reqBod = JSON.stringify({
+    LoanId: prevState.loanId,
+    RepayAmount: parseFloat(formData.get("repayValue")),
+  });
+  console.log(reqBod);
+  const theThing = await fetch(`${API_ROUTE}/loan/repay`, {
+    method: "POST",
+    body: reqBod,
+    headers: {
+      NationName: prevState.nationName,
+      AuthKey: prevState.authKey,
+    },
+  });
+  console.log(theThing.status);
+};
+
+const writeOff = async (prevState, formData) => {
+  console.log(API_ROUTE);
+  const writeOffAtt = await fetch(`${API_ROUTE}/loan/${prevState.loanId}`, {
+    method: "DELETE",
+    headers: {
+      AuthKey: prevState.authKey,
+      NationName: prevState.name,
+    },
+  });
+  return null;
+};
+
+export { getUserLoans, issueLoan, getLoan, repayLoan, writeOff };
