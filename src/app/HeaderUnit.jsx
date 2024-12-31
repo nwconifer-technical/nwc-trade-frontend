@@ -4,7 +4,7 @@ import Link from "next/link";
 import signout from "./access/signout";
 
 const quickCash = async (name) => {
-  const API_ROUTE = process.env.API_ADDRESS;
+  const API_ROUTE = process.env.NEXT_PUBLIC_API_ADDRESS;
   const theFetched = await fetch(`${API_ROUTE}/cash/quick/${name}`);
   if (theFetched.status != 200) {
     return {
@@ -16,17 +16,18 @@ const quickCash = async (name) => {
 
 const Navbar = async (props) => {
   var userPerms = "";
+  var cashVal = {};
   if (props.loggedIn) {
     userPerms = props.sessionCookie.permission;
+    cashVal = await quickCash(props.sessionCookie.name);
   }
-  const cashVal = await quickCash(props.sessionCookie.name);
   return (
     <nav className="navbar">
       <div className="navbar-brand">
         <Image
-          src={`/public/nsro.png`}
+          src={`/nwcx_Logo.png`}
           alt="The NSRO Logo"
-          width={175}
+          width={91}
           height={75}
         />
       </div>

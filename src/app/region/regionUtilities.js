@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 
-const API_ROUTE = process.env.API_ADDRESS;
+const API_ROUTE = process.env.NEXT_PUBLIC_API_ADDRESS;
 
 const getRegionInfo = async (nation, region, authKey) => {
   const received = await fetch(`${API_ROUTE}/region/${region}`, {

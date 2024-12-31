@@ -2,7 +2,7 @@
 import React from "react";
 import Link from "next/link";
 
-const API_ROUTE = process.env.API_ADDRESS;
+const API_ROUTE = process.env.NEXT_PUBLIC_API_ADDRESS;
 
 const HoldingsTable = async (props) => {
   var holdingsReq = null;

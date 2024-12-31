@@ -2,7 +2,7 @@
 const parseString = require("xml2js").parseString;
 import { redirect } from "next/navigation";
 
-const API_ROUTE = process.env.API_ADDRESS;
+const API_ROUTE = process.env.NEXT_PUBLIC_API_ADDRESS;
 
 const doSignup = async (prevState, formData) => {
   const nationName = formData.get("nationName");

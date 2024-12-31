@@ -1,6 +1,6 @@
 "use server";
 
-const API_ROUTE = process.env.API_ADDRESS;
+const API_ROUTE = process.env.NEXT_PUBLIC_API_ADDRESS;
 
 const getAllNations = async () => {
   console.log(`${API_ROUTE}/list/nations`);
