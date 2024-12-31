@@ -25,7 +25,7 @@ const Navbar = async (props) => {
     <nav className="navbar">
       <div className="navbar-brand">
         <Image
-          src={`/nwcx_Logo.png`}
+          src={"/nwcx_Logo.png"}
           alt="The NSRO Logo"
           width={91}
           height={75}
