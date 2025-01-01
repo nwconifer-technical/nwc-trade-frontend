@@ -2,6 +2,7 @@ import react from "react";
 import Image from "next/image";
 import Link from "next/link";
 import signout from "./access/signout";
+import nwcx_Logo from "./nwcx_Logo.png";
 
 const quickCash = async (name) => {
   const API_ROUTE = process.env.NEXT_PUBLIC_API_ADDRESS;
@@ -24,12 +25,7 @@ const Navbar = async (props) => {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <Image
-          src={"/nwcx_Logo.png"}
-          alt="The NSRO Logo"
-          width={91}
-          height={75}
-        />
+        <Image src={nwcx_Logo} alt="The NSRO Logo" width={91} height={75} />
       </div>
       <div className="navbar-menu">
         <Link href="/" className="navbar-item">
