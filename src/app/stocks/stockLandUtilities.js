@@ -4,13 +4,16 @@ const API_ROUTE = process.env.NEXT_PUBLIC_API_ADDRESS;
 
 export const getAllEquities = async () => {
   const cashRequ = await fetch(`${API_ROUTE}/shares/quote`);
+  if (cashRequ.status != 200) {
+    return false;
+  }
   const theCashJson = await cashRequ.json();
   return theCashJson;
 };
 
 export const getAStock = async (shareTicker) => {
   const cashRequ = await fetch(`${API_ROUTE}/shares/book/${shareTicker}`);
-  if (cashRequ.status == 404) {
+  if (cashRequ.status != 200) {
     return null;
   }
   const theCashJson = await cashRequ.json();
@@ -19,7 +22,7 @@ export const getAStock = async (shareTicker) => {
 
 export const getPriceHistory = async (ticker) => {
   const pricesRequ = await fetch(`${API_ROUTE}/shares/recentprices/${ticker}`);
-  if (pricesRequ.status == 404) {
+  if (pricesRequ.status == 404 || !pricesRequ.bodyUsed) {
     return {
       RecentPrice: [],
     };

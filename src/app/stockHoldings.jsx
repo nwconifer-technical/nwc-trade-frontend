@@ -27,7 +27,8 @@ const HoldingsTable = async (props) => {
   const stockHoldJS = await holdingsReq.json();
   return (
     <div className="box">
-      <h1 className="title is-2">Stock Holdings</h1>
+      <h1 className="title is-3">Stock Data</h1>
+      <h3 className="subtitle is-3">Stock Holdings</h3>
       <table className="table">
         <thead>
           <tr>
@@ -69,6 +70,31 @@ const HoldingsTable = async (props) => {
               <td>You hold no shares</td>
             </tr>
           )}
+        </tbody>
+      </table>
+      <h3 className="subtitle is-3">Your Open Orders</h3>
+      <table className="table">
+        <thead>
+          <tr>
+            <td>Trade ID</td>
+            <td>Ticker</td>
+            <td>Direction</td>
+            <td>Quantity</td>
+            <td>Price Type</td>
+            <td>Share Price</td>
+          </tr>
+        </thead>
+        <tbody>
+          {stockHoldJS.OpenOrders.map((order) => (
+            <tr key={order.TradeId}>
+              <td>{order.TradeId}</td>
+              <td>{order.Ticker}</td>
+              <td>{order.Direction}</td>
+              <td>{order.Quantity}</td>
+              <td>{order.PriceType}</td>
+              <td>${order.Price}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

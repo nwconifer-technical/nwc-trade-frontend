@@ -93,7 +93,6 @@ const repayLoan = async (prevState, formData) => {
     LoanId: prevState.loanId,
     RepayAmount: parseFloat(formData.get("repayValue")),
   });
-  console.log(reqBod);
   const theThing = await fetch(`${API_ROUTE}/loan/repay`, {
     method: "POST",
     body: reqBod,
@@ -102,11 +101,9 @@ const repayLoan = async (prevState, formData) => {
       AuthKey: prevState.authKey,
     },
   });
-  console.log(theThing.status);
 };
 
 const writeOff = async (prevState, formData) => {
-  console.log(API_ROUTE);
   const writeOffAtt = await fetch(`${API_ROUTE}/loan/${prevState.loanId}`, {
     method: "DELETE",
     headers: {

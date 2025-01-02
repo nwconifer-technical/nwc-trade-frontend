@@ -5,6 +5,7 @@ import { getCashInfo } from "./accountUtilites";
 import TransactForm from "./transactForm";
 import { redirect } from "next/navigation";
 import { HoldingsTable } from "../stockHoldings";
+import { PermissionEdit } from "./permissionForm";
 
 const CashAccount = async () => {
   const cookieStore = await cookies();
@@ -18,12 +19,27 @@ const CashAccount = async () => {
     <>
       <div className="block">
         <h1 className="title is-1">Hello, {sessionCookie.name}</h1>
-        <h3 className="title is-4">Cash Balance: ${capitalReturn.handCash}</h3>
-        <h5 className="subtitle">
-          Cash In Escrow: ${capitalReturn.escrowCash}
-        </h5>
-        <br />
         <div className="columns">
+          <div className="column">
+            <h3 className="title is-4">
+              Cash Balance: ${capitalReturn.handCash}
+            </h3>
+            <h5 className="subtitle">
+              Cash In Escrow: ${capitalReturn.escrowCash}
+            </h5>
+            <HoldingsTable
+              authKey={sessionCookie.authToken}
+              nationName={sessionCookie.name}
+            />
+            {sessionCookie.permission == "admin" ? (
+              <PermissionEdit
+                nationName={sessionCookie.name}
+                authKey={sessionCookie.authToken}
+              />
+            ) : (
+              ""
+            )}
+          </div>
           <div className="column">
             <div className="box">
               <TransactForm
@@ -33,12 +49,6 @@ const CashAccount = async () => {
                 currentCashAmount={capitalReturn.handCash}
               />
             </div>
-            <HoldingsTable
-              authKey={sessionCookie.authToken}
-              nationName={sessionCookie.name}
-            />
-          </div>
-          <div className="column">
             <div className="box">
               <h5 className="subtitle">Recent Cash Transactions</h5>
               <table className="table">

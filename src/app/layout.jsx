@@ -22,7 +22,6 @@ const RootLayout = async ({ children }) => {
   const sessionCookie = cookieStore.get("session");
   var theCookie;
   if (sessionCookie) theCookie = await decrypt(sessionCookie.value);
-  console.log(sessionCookie);
   return (
     <html lang="en" data-theme="light">
       <body className={figtree.className}>
