@@ -16,13 +16,12 @@ export const getAStock = async (shareTicker) => {
   if (cashRequ.status != 200) {
     return null;
   }
-  const theCashJson = await cashRequ.json();
-  return theCashJson;
+  return await cashRequ.json();
 };
 
 export const getPriceHistory = async (ticker) => {
   const pricesRequ = await fetch(`${API_ROUTE}/shares/recentprices/${ticker}`);
-  if (pricesRequ.status == 404 || !pricesRequ.bodyUsed) {
+  if (pricesRequ.status == 404) {
     return {
       RecentPrice: [],
     };
