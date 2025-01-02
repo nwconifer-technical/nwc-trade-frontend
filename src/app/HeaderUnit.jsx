@@ -35,16 +35,14 @@ const Navbar = async (props) => {
           All Stocks
         </Link>
         {props.loggedIn ? (
-          <Link href="/loans" className="navbar-item">
-            My Loans
-          </Link>
-        ) : (
-          ""
-        )}
-        {userPerms != "citizen" ? (
-          <Link href={"/region"} className="navbar-item">
-            My Region
-          </Link>
+          <>
+            <Link href="/loans" className="navbar-item">
+              My Loans
+            </Link>
+            <Link href={"/region"} className="navbar-item">
+              My Region
+            </Link>
+          </>
         ) : (
           ""
         )}
