@@ -85,16 +85,22 @@ const HoldingsTable = async (props) => {
           </tr>
         </thead>
         <tbody>
-          {stockHoldJS.OpenOrders.map((order) => (
-            <tr key={order.TradeId}>
-              <td>{order.TradeId}</td>
-              <td>{order.Ticker}</td>
-              <td>{order.Direction}</td>
-              <td>{order.Quantity}</td>
-              <td>{order.PriceType}</td>
-              <td>${order.Price}</td>
+          {stockHoldJS.OpenOrders ? (
+            stockHoldJS.OpenOrders.map((order) => (
+              <tr key={order.TradeId}>
+                <td>{order.TradeId}</td>
+                <td>{order.Ticker}</td>
+                <td>{order.Direction}</td>
+                <td>{order.Quantity}</td>
+                <td>{order.PriceType}</td>
+                <td>${order.Price}</td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td>No Open Orders</td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
     </div>
