@@ -10,7 +10,9 @@ const getAllNations = async () => {
       Accept: "application/json",
     },
   });
-  return nationRet.json();
+  const retJs = await nationRet.json();
+  retJs.Nations.sort((a, b) => b.NetWorth - a.NetWorth);
+  return retJs;
 };
 
 export { getAllNations };

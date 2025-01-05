@@ -29,17 +29,21 @@ const index = async () => {
           <thead>
             <tr>
               <th>Nations</th>
+              <th>Net Worth</th>
             </tr>
           </thead>
           <tbody>
             {allNations.Nations ? (
-              allNations.Nations.map((nationName) => (
-                <tr key={nationName}>
-                  <td>{nationName}</td>
+              allNations.Nations.map((nation) => (
+                <tr key={nation.Name}>
+                  <td>{nation.Name}</td>
+                  <td>${nation.NetWorth}</td>
                 </tr>
               ))
             ) : (
-              <p>No nations registered</p>
+              <tr>
+                <td>No nations registered</td>
+              </tr>
             )}
           </tbody>
         </table>
