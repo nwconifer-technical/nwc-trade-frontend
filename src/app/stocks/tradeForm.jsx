@@ -48,7 +48,7 @@ export const TradeForm = (props) => {
             value={state.ticker}
             disabled={true}
             readOnly={true}
-            ) : 
+            ) : ""
           }
         />
       </div>
