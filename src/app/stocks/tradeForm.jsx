@@ -44,9 +44,12 @@ export const TradeForm = (props) => {
           type="text"
           name="ticker"
           id="ticker"
-          value={state.ticker ? state.ticker : ""}
-          disabled={state.ticker ? true : false}
-          readOnly={state.ticker ? true : false}
+          {state.ticker ? (
+            value={state.ticker}
+            disabled={true}
+            readOnly={true}
+            ) : 
+          }
         />
       </div>
       <div className="field">
