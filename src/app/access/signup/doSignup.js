@@ -14,28 +14,32 @@ const doSignup = async (prevState, formData) => {
   const received = await response.text();
   var appropriate;
   parseString(received, (_, result) => (appropriate = result.NATION));
-  if (appropriate.VERIFY[0] == "1") {
-    const registerPackage = {
-      NationName: nationName,
-      PasswordString,
-      RegionName: appropriate.REGION[0],
-    };
-    const registerR = await fetch(`${API_ROUTE}/signup/nation`, {
-      body: JSON.stringify(registerPackage),
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (registerR.status == 201) {
-      return redirect("/access/login");
-    } else if (registerR.status == 409) {
-      return { statusMessage: "You are already registered" };
+  try {
+    if (appropriate.VERIFY[0] == "1") {
+      const registerPackage = {
+        NationName: nationName,
+        PasswordString,
+        RegionName: appropriate.REGION[0],
+      };
+      const registerR = await fetch(`${API_ROUTE}/signup/nation`, {
+        body: JSON.stringify(registerPackage),
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (registerR.status == 201) {
+        return redirect("/access/login");
+      } else if (registerR.status == 409) {
+        return { statusMessage: "You are already registered" };
+      } else {
+        return { statusMessage: "Server Error" };
+      }
     } else {
-      return { statusMessage: "Server Error" };
+      return { statusMessage: "Nation Not Verified" };
     }
-  } else {
-    return { statusMessage: "Nation Not Verified" };
+  } catch {
+    return { statusMessage: "An Error Occurred" };
   }
 };
 

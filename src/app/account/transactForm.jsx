@@ -44,7 +44,14 @@ const TransactForm = (props) => {
         <label className="label" htmlFor="value">
           Amount to Send ($):
         </label>
-        <input type="number" name="amount" id="value" step={0.01} required />
+        <input
+          type="number"
+          name="amount"
+          id="value"
+          step={0.01}
+          min={0.01}
+          required
+        />
       </div>
       <div className="field">
         <label className="label" htmlFor="message">

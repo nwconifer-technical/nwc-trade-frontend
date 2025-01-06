@@ -15,4 +15,16 @@ const getAllNations = async () => {
   return retJs;
 };
 
-export { getAllNations };
+const quickCash = async (name) => {
+  const API_ROUTE = process.env.NEXT_PUBLIC_API_ADDRESS;
+  const theFetched = await fetch(`${API_ROUTE}/cash/quick/${name}`);
+  if (theFetched.status != 200) {
+    return {
+      CashInHand: 0,
+    };
+  }
+  const theThing = await theFetched.json();
+  return theThing;
+};
+
+export { getAllNations, quickCash };
