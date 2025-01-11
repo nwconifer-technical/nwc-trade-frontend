@@ -24,9 +24,21 @@ const AllEquities = async () => {
                 <tr key={stock.ticker}>
                   <td>{stock.ticker}</td>
                   <td>{stock.region}</td>
-                  <td>${stock.marketCap}</td>
+                  <td>
+                    {Intl.NumberFormat("en-UK", {
+                      style: "currency",
+                      currency: "USD",
+                      currencyDisplay: "narrowSymbol",
+                    }).format(stock.marketCap)}
+                  </td>
                   <td>{stock.totalVolume}</td>
-                  <td>${stock.marketPrice}</td>
+                  <td>
+                    {Intl.NumberFormat("en-UK", {
+                      style: "currency",
+                      currency: "USD",
+                      currencyDisplay: "narrowSymbol",
+                    }).format(stock.marketPrice)}
+                  </td>
                   <td>
                     <Link
                       href={`/stocks/${stock.ticker}`}

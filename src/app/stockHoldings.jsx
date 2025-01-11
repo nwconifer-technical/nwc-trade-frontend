@@ -51,9 +51,27 @@ const HoldingsTable = async (props) => {
                 <tr key={holding.Ticker}>
                   <td>{holding.Ticker}</td>
                   <td>{holding.ShareQuantity}</td>
-                  <td>${holding.AvgPrice}</td>
-                  <td>${curQuote.marketPrice}</td>
-                  <td>${curQuote.marketPrice * holding.ShareQuantity}</td>
+                  <td>
+                    {Intl.NumberFormat("en-UK", {
+                      style: "currency",
+                      currency: "USD",
+                      currencyDisplay: "narrowSymbol",
+                    }).format(holding.AvgPrice)}
+                  </td>
+                  <td>
+                    {Intl.NumberFormat("en-UK", {
+                      style: "currency",
+                      currency: "USD",
+                      currencyDisplay: "narrowSymbol",
+                    }).format(curQuote.marketPrice)}
+                  </td>
+                  <td>
+                    {Intl.NumberFormat("en-UK", {
+                      style: "currency",
+                      currency: "USD",
+                      currencyDisplay: "narrowSymbol",
+                    }).format(curQuote.marketPrice * holding.ShareQuantity)}
+                  </td>
                   <td>
                     <Link
                       href={`/stocks/${holding.Ticker}`}
@@ -91,9 +109,15 @@ const HoldingsTable = async (props) => {
                 <td>{order.TradeId}</td>
                 <td>{order.Ticker}</td>
                 <td>{order.Direction}</td>
-                <td>{order.Quantity}</td>
+                <td>{Intl.NumberFormat("en-UK").format(order.Quantity)}</td>
                 <td>{order.PriceType}</td>
-                <td>${order.Price}</td>
+                <td>
+                  {Intl.NumberFormat("en-UK", {
+                    style: "currency",
+                    currency: "USD",
+                    currencyDisplay: "narrowSymbol",
+                  }).format(order.Price)}
+                </td>
               </tr>
             ))
           ) : (

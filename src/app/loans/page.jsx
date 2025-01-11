@@ -43,8 +43,20 @@ const LoanListings = async () => {
                         <td>{loan.lender}</td>
                         <td>{loan.lendee}</td>
                         <td>{loan.loanRate}%</td>
-                        <td>${loan.lentValue}</td>
-                        <td>${loan.currentValue}</td>
+                        <td>
+                          {Intl.NumberFormat("en-UK", {
+                            style: "currency",
+                            currency: "USD",
+                            currencyDisplay: "narrowSymbol",
+                          }).format(loan.lentValue)}
+                        </td>
+                        <td>
+                          {Intl.NumberFormat("en-UK", {
+                            style: "currency",
+                            currency: "USD",
+                            currencyDisplay: "narrowSymbol",
+                          }).format(loan.currentValue)}
+                        </td>
                         <td>
                           <Link
                             href={`/loans/${loan.id}`} // Replace this when [loanId]/page.jsx is set up

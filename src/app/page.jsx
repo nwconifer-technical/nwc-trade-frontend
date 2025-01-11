@@ -37,7 +37,13 @@ const index = async () => {
               allNations.Nations.map((nation) => (
                 <tr key={nation.Name}>
                   <td>{nation.Name}</td>
-                  <td>${nation.NetWorth}</td>
+                  <td>
+                    {Intl.NumberFormat("en-UK", {
+                      style: "currency",
+                      currency: "USD",
+                      currencyDisplay: "narrowSymbol",
+                    }).format(nation.NetWorth)}
+                  </td>
                 </tr>
               ))
             ) : (

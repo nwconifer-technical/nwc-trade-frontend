@@ -29,10 +29,19 @@ const ALoan = async ({ params }) => {
                 Interest Rate: {theLoan.TheLoan.loanRate}%
               </div>
               <div className="cell">
-                Lent Value: ${theLoan.TheLoan.lentValue}
+                Lent Value:
+                {Intl.NumberFormat("en-UK", {
+                  style: "currency",
+                  currency: "USD",
+                }).format(theLoan.TheLoan.lentValue)}
               </div>
               <div className="cell">
-                Current Value: ${theLoan.TheLoan.currentValue}
+                Current Value:{" "}
+                {Intl.NumberFormat("en-UK", {
+                  style: "currency",
+                  currency: "USD",
+                  currencyDisplay: "narrowSymbol",
+                }).format(theLoan.TheLoan.currentValue)}
               </div>
             </div>
           </div>
@@ -55,7 +64,13 @@ const ALoan = async ({ params }) => {
                         <td>{transact.timecode}</td>
                         <td>{transact.sender}</td>
                         <td>{transact.receiver}</td>
-                        <td>${transact.value}</td>
+                        <td>
+                          {Intl.NumberFormat("en-UK", {
+                            style: "currency",
+                            currency: "USD",
+                            currencyDisplay: "narrowSymbol",
+                          }).format(transact.value)}
+                        </td>
                         <td>{transact.message}</td>
                       </tr>
                     ))

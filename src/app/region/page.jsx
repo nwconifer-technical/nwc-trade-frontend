@@ -32,8 +32,22 @@ const RegionAccount = async () => {
     <>
       <div className="block">
         <h1 className="title is-1">{sessionCookie.region} Account Details</h1>
-        <h3 className="title is-4">Cash Balance: ${regionInfo.HandValue}</h3>
-        <h5 className="subtitle">Cash In Escrow: ${regionInfo.EscrowValue}</h5>
+        <h3 className="title is-4">
+          Cash Balance:{" "}
+          {Intl.NumberFormat("en-UK", {
+            style: "currency",
+            currency: "USD",
+            currencyDisplay: "narrowSymbol",
+          }).format(regionInfo.HandValue)}
+        </h3>
+        <h5 className="subtitle">
+          Cash In Escrow:{" "}
+          {Intl.NumberFormat("en-UK", {
+            style: "currency",
+            currency: "USD",
+            currencyDisplay: "narrowSymbol",
+          }).format(regionInfo.EscrowValue)}
+        </h5>
         <br />
         <div className="columns">
           <div className="column">
@@ -86,8 +100,21 @@ const RegionAccount = async () => {
                         <td>{loan.lender}</td>
                         <td>{loan.lendee}</td>
                         <td>{loan.loanRate}%</td>
-                        <td>${loan.lentValue}</td>
-                        <td>${loan.currentValue}</td>
+                        <td>
+                          {Intl.NumberFormat("en-UK", {
+                            style: "currency",
+                            currency: "USD",
+                            currencyDisplay: "narrowSymbol",
+                          }).format(loan.lentValue)}
+                        </td>
+                        <td>
+                          $
+                          {Intl.NumberFormat("en-UK", {
+                            style: "currency",
+                            currency: "USD",
+                            currencyDisplay: "narrowSymbol",
+                          }).format(loan.currentValue)}
+                        </td>
                         <td>
                           <Link
                             href={`/loans/${loan.id}`} // Replace this when [loanId]/page.jsx is set up
@@ -123,7 +150,13 @@ const RegionAccount = async () => {
                           <td>{transact.timecode}</td>
                           <td>{transact.sender}</td>
                           <td>{transact.receiver}</td>
-                          <td>${transact.value}</td>
+                          <td>
+                            {Intl.NumberFormat("en-UK", {
+                              style: "currency",
+                              currency: "USD",
+                              currencyDisplay: "narrowSymbol",
+                            }).format(transact.value)}
+                          </td>
                           <td>{transact.message}</td>
                         </tr>
                       ))

@@ -21,7 +21,12 @@ const AStock = async ({ params }) => {
         {ticker} - {theBook.CurrentQuote.region}
       </h1>
       <h2 className="subtitle">
-        Share Price: ${theBook.CurrentQuote.marketPrice}
+        Share Price:{" "}
+        {Intl.NumberFormat("en-UK", {
+          style: "currency",
+          currency: "USD",
+          currencyDisplay: "narrowSymbol",
+        }).format(theBook.CurrentQuote.marketPrice)}
       </h2>
       <div className="columns">
         <div className="column">
@@ -33,10 +38,18 @@ const AStock = async ({ params }) => {
             <p className="subtitle is-5">Stock Info</p>
             <div className="grid is-col-min-12">
               <div className="cell">
-                Market Capitalisation: ${theBook.CurrentQuote.marketCap}
+                Market Capitalisation:{" "}
+                {Intl.NumberFormat("en-UK", {
+                  style: "currency",
+                  currency: "USD",
+                  currencyDisplay: "narrowSymbol",
+                }).format(theBook.CurrentQuote.marketCap)}
               </div>
               <div className="cell">
-                Total Share Volume: {theBook.CurrentQuote.totalVolume}
+                Total Share Volume:{" "}
+                {Intl.NumberFormat("en-UK").format(
+                  theBook.CurrentQuote.totalVolume
+                )}
               </div>
               <div className="cell">Order Book Depth: {theBook.BookDepth}</div>
               <div className="cell">

@@ -22,10 +22,20 @@ const CashAccount = async () => {
         <div className="columns">
           <div className="column">
             <h3 className="title is-4">
-              Cash Balance: ${capitalReturn.handCash}
+              Cash Balance:{" "}
+              {Intl.NumberFormat("en-UK", {
+                style: "currency",
+                currency: "USD",
+                currencyDisplay: "narrowSymbol",
+              }).format(capitalReturn.handCash)}
             </h3>
             <h5 className="subtitle">
-              Cash In Escrow: ${capitalReturn.escrowCash}
+              Cash In Escrow:
+              {Intl.NumberFormat("en-UK", {
+                style: "currency",
+                currency: "USD",
+                currencyDisplay: "narrowSymbol",
+              }).format(capitalReturn.escrowCash)}
             </h5>
             <HoldingsTable
               authKey={sessionCookie.authToken}
@@ -68,7 +78,13 @@ const CashAccount = async () => {
                           <td>{transact.timecode}</td>
                           <td>{transact.sender}</td>
                           <td>{transact.receiver}</td>
-                          <td>${transact.value}</td>
+                          <td>
+                            {Intl.NumberFormat("en-UK", {
+                              style: "currency",
+                              currency: "USD",
+                              currencyDisplay: "narrowSymbol",
+                            }).format(transact.value)}
+                          </td>
                           <td>{transact.message}</td>
                         </tr>
                       ))
