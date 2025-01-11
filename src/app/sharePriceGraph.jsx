@@ -1,6 +1,6 @@
 "use server";
 import react from "react";
-import { LineChart } from "@mui/x-charts";
+import { LineChart } from "@mui/x-charts/LineChart";
 import { getPriceHistory } from "./stocks/stockLandUtilities";
 
 export const SharePriceGraph = async (props) => {

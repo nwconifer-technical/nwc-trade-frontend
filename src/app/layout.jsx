@@ -23,7 +23,7 @@ const RootLayout = async ({ children }) => {
   var theCookie;
   if (sessionCookie) theCookie = await decrypt(sessionCookie.value);
   return (
-    <html lang="en" data-theme="light">
+    <html lang="en">
       <body className={figtree.className}>
         <AppRouterCacheProvider>
           <header className="header">

@@ -37,6 +37,9 @@ const Navbar = async (props) => {
         ) : (
           ""
         )}
+        <Link href={"/faq"} className="navbar-item">
+          FAQ
+        </Link>
       </div>
       <div className="navbar-end">
         {props.loggedIn ? (
