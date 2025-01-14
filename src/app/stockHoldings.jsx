@@ -41,7 +41,7 @@ const HoldingsTable = async (props) => {
           </tr>
         </thead>
         <tbody>
-          {stockHoldJS.Holdings.length > 0 ? (
+          {stockHoldJS.Holdings ? (
             stockHoldJS.Holdings.map(async (holding) => {
               const shareQuote = await fetch(
                 `${API_ROUTE}/shares/quote/${holding.Ticker}`
