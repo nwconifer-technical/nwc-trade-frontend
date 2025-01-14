@@ -5,26 +5,25 @@ import { getAllNations } from "./homepageUtilities";
 const index = async () => {
   const allNations = await getAllNations();
   return (
-    <div className="block">
-      <div className="message is-danger">
-        <div className="message-header">UNDER DEVELOPMENT</div>
-        <div className="message-body">
-          This site is still under development, is pretty unstable and cash
-          balances will jump around. <br />
-          Before going actually live, all trades, transactions, loans and user
-          accounts will be deleted.
+    <>
+      <div className="block">
+        <h1 className="title">Welcome to the New West Coniferan Exchange!</h1>
+        <div>
+          <p>
+            This is a region stock exchange for the site{" "}
+            <Link href={"https://nationstates.net"}>Nationsates</Link>, allowing
+            you to trade shares in regions as <br />
+            though they were companies. To sign up and start trading, go the the{" "}
+            <Link href={"access/signup"}>signup page</Link>, for any questions{" "}
+            <br />
+            you may have, go to the{" "}
+            <Link href={"/faq"}>Frequently Asked Questions</Link> page, and be
+            sure to join our{" "}
+            <Link href={"https://discord.gg/dDTQ9Zk5xf"}>Discord</Link>.
+          </p>
         </div>
       </div>
-      <h1 className="title">Welcome to the Site!</h1>
-
-      <p>
-        This will, eventually, be the premiere{" "}
-        <Link href={"https://www.nationstates.net/"}>Nationstates</Link> cash
-        systems and region stock exchange, for now it&apos;s kinda empty. If you
-        run a region, please get in touch with @alicolliar on Discord and I can
-        add you to the system, probably.
-      </p>
-      <div className="box">
+      <div className="block">
         <table className="table">
           <thead>
             <tr>
@@ -54,7 +53,15 @@ const index = async () => {
           </tbody>
         </table>
       </div>
-    </div>
+      <iframe
+        src="https://discord.com/widget?id=1301990338713354250&theme=dark"
+        width="350"
+        height="200"
+        allowtransparency="true"
+        frameborder="0"
+        sandbox="allow-same-origin allow-scripts"
+      ></iframe>
+    </>
   );
 };
 

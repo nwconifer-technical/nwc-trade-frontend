@@ -40,6 +40,9 @@ const Navbar = async (props) => {
         <Link href={"/faq"} className="navbar-item">
           FAQ
         </Link>
+        <Link href={"https://discord.gg/dDTQ9Zk5xf"} className="navbar-item">
+          Discord
+        </Link>
       </div>
       <div className="navbar-end">
         {props.loggedIn ? (

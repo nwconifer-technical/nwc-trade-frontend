@@ -143,8 +143,8 @@ const FAQPage = () => (
         <p>
           The exchange won&apos;t let you enter buy orders at market price if
           the current value of the order + 15% would be more than your current
-          cash balance, this is to help remedy price rises stopping your order
-          from being executed.
+          cash balance, this is to help stop price rises from causing errors
+          with execution of market orders.
         </p>
       </div>
       <div className="block">
@@ -180,13 +180,14 @@ const FAQPage = () => (
           So, now my region&apos;s registered, what happens next?
         </h3>
         <p>
-          So, you have a region account, which owns 1,000,000 shares in itself
-          and has $1,000,000 in it&apos;s account. Every time someone signs up
-          to your region, they&apos;ll get a $10,000 loan at 5% interest. You
-          can, and should, enter a sell order for some of the region&apos;s
-          shares at some point, but maybe try and build some hype around the
-          share and get some buy orders in before hand or you&apos;ll just
-          annihilate the market price. Also,{" "}
+          Each region has a region account, which owns 1,000,000 shares in
+          itself and has $1,000,000 in it&apos;s account. Every time someone
+          signs up to your region, they&apos;ll get a $10,000 loan at 2.5%
+          interest to the region, but the capital for the loan comes from the
+          void. You can, and should, enter a sell order for some of the
+          region&apos;s shares at some point, but maybe try and build some hype
+          around the share and get some buy orders in before hand or you&apos;ll
+          just annihilate the market price. Also,{" "}
           <b>
             <i>do not sell all the shares</i>
           </b>
@@ -224,7 +225,7 @@ const FAQPage = () => (
       <div className="block">
         <h3 className="subtitle is-3">Can I maybe have a look the code?</h3>
         <p>
-          Maybe! The frontend and bot are both public on the Github org,
+          Maybe! The frontend and bot are both public on the Github org,{" "}
           <Link href={"https://www.github.com/nwconifer-technical"}>
             nwconifer-technical
           </Link>{" "}
