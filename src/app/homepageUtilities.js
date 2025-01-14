@@ -11,6 +11,9 @@ const getAllNations = async () => {
     },
   });
   const retJs = await nationRet.json();
+  if (!retJs.Nations) {
+    return { Nations: null };
+  }
   retJs.Nations.sort((a, b) => b.NetWorth - a.NetWorth);
   return retJs;
 };
