@@ -51,33 +51,48 @@ const RegionAccount = async () => {
         <br />
         <div className="columns">
           <div className="column">
-            <div className="box">
-              <TransactForm
-                payerName={sessionCookie.region}
-                executorName={sessionCookie.name}
-                authKey={sessionCookie.authToken}
-                currentCashAmount={regionInfo.HandValue}
-              />
-            </div>
+            {sessionCookie.permission != "citizen" ? (
+              <div className="box">
+                <TransactForm
+                  payerName={sessionCookie.region}
+                  executorName={sessionCookie.name}
+                  authKey={sessionCookie.authToken}
+                  currentCashAmount={regionInfo.HandValue}
+                />
+              </div>
+            ) : (
+              ""
+            )}
             <HoldingsTable
               region={sessionCookie.region}
               authKey={sessionCookie.authToken}
               nationName={sessionCookie.name}
             />
-            <div className="box">
-              <TradeForm
-                acctName={sessionCookie.region}
-                authKey={sessionCookie.authToken}
-                traderName={sessionCookie.name}
-              />
-            </div>
+            {sessionCookie.permission != "citizen" ? (
+              <div className="box">
+                <TradeForm
+                  acctName={sessionCookie.region}
+                  authKey={sessionCookie.authToken}
+                  traderName={sessionCookie.name}
+                />
+              </div>
+            ) : (
+              ""
+            )}
           </div>
           <div className="column">
-            <LoanForm
-              authKey={sessionCookie.authToken}
-              payerName={sessionCookie.region}
-              trader={sessionCookie.name}
-            />
+            {sessionCookie.permission != "citizen" ? (
+              <div className="box">
+                <h1 className="subtitle">Issue Loan</h1>
+                <LoanForm
+                  authKey={sessionCookie.authToken}
+                  payerName={sessionCookie.region}
+                  trader={sessionCookie.name}
+                />
+              </div>
+            ) : (
+              ""
+            )}
             <div className="box">
               <h5 className="subtitle">Existing Loans</h5>
               <table className="table">
