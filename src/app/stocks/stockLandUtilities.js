@@ -39,6 +39,55 @@ export const getPriceHistory = async (ticker) => {
 // 	Price     float32
 // }
 
+export const transferShares = async (prevState, formData) => {
+  const trader = prevState.traderName;
+  const ticker = formData.get("ticker");
+  const sender = prevState.acctName;
+  const receiver = formData.get("receiver");
+  const quantity = formData.get("quantity");
+  const reqBod = JSON.stringify({
+    ticker,
+    sender,
+    receiver,
+    quantity,
+    quantity: Number(quantity),
+    AvgPrice: Number(0),
+  });
+  const transferSend = await fetch(`${API_ROUTE}/shares/transfer`, {
+    method: "POST",
+    body: reqBod,
+    headers: {
+      AuthKey: prevState.authKey,
+      NationName: prevState.traderName,
+    },
+  });
+  if (transferSend.status == 404) {
+    return {
+      good: false,
+      statusMessage: `You have no shares of this to transfer`,
+      authKey: prevState.authKey,
+      traderName: prevState.traderName,
+      acctName: prevState.acctName,
+    };
+  } else if (transferSend.status == 500) {
+    return {
+      good: false,
+      statusMessage: `Server Error`,
+      authKey: prevState.authKey,
+      traderName: prevState.traderName,
+      acctName: prevState.acctName,
+    };
+  } else {
+    return {
+      good: true,
+      statusMessage: `Shares transferred`,
+      authKey: prevState.authKey,
+      traderName: prevState.traderName,
+      acctName: prevState.acctName,
+    };
+  }
+};
+
 export const sendTrade = async (prevState, formData) => {
   const trader = prevState.traderName;
   const ticker = formData.get("ticker") || prevState.ticker;

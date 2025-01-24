@@ -6,6 +6,7 @@ import TransactForm from "./transactForm";
 import { redirect } from "next/navigation";
 import { HoldingsTable } from "../stockHoldings";
 import { PermissionEdit } from "./permissionForm";
+import { TransferForm } from "../stocks/transferForm";
 
 const CashAccount = async () => {
   const cookieStore = await cookies();
@@ -49,6 +50,13 @@ const CashAccount = async () => {
             ) : (
               ""
             )}
+            <div className="box">
+              <h3 className="subtitle is-5">Transfer Shares</h3>
+              <TransferForm
+                authKey={sessionCookie.authToken}
+                traderName={sessionCookie.name}
+              />
+            </div>
           </div>
           <div className="column">
             <div className="box">
