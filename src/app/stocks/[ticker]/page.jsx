@@ -136,6 +136,13 @@ const AStock = async ({ params }) => {
           ) : (
             ""
           )}
+          <div className="box">
+            <h1 className="subtitle is-5">Some quick notes</h1>
+            <p>
+              To submit a market order, you need to have more than (quantity x
+              share price) x 115% in cash for the order to be submitted.
+            </p>
+          </div>
         </div>
       </div>
     </div>

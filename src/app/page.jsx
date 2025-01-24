@@ -13,7 +13,7 @@ const index = async () => {
             This is a region stock exchange for the site{" "}
             <Link href={"https://nationstates.net"}>Nationsates</Link>, allowing
             you to trade shares in regions as <br />
-            though they were companies. To sign up and start trading, go the the{" "}
+            though they were companies. To sign up and start trading, go to the{" "}
             <Link href={"access/signup"}>signup page</Link>, for any questions{" "}
             <br />
             you may have, go to the{" "}

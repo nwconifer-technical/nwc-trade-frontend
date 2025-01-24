@@ -123,7 +123,6 @@ const RegionAccount = async () => {
                           }).format(loan.lentValue)}
                         </td>
                         <td>
-                          $
                           {Intl.NumberFormat("en-UK", {
                             style: "currency",
                             currency: "USD",
