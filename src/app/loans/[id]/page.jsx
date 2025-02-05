@@ -94,7 +94,8 @@ const ALoan = async ({ params }) => {
             ""
           )}
           {theLoan.TheLoan.lender == sessionCookie.name ||
-          theLoan.TheLoan.lender == sessionCookie.region ? (
+          (theLoan.TheLoan.lender == sessionCookie.region &&
+            sessionCookie.permission != "citizen") ? (
             <div className="box">
               <h1 className="title is-5">Write-off Loan</h1>
               <p>This will instantly delete the selected loan!</p>
